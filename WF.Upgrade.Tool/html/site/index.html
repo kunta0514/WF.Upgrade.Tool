@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>主页</title>
+    <link href="../../Content/bootstrap.css" rel="stylesheet">
+    <link href="../../resource/css/style.css" rel="stylesheet">
+    <script src="../../Scripts/jquery-3.1.0.js"></script>
+    <script src="../../Scripts/bootstrap.js"></script>
+    <script src="../../resource/js/template.js"></script>
+</head>
+<body>
+    <form method="post">
+
+        <div class="container-fluid">
+            <br />
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="CustomCode">客户编码</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="CustomCode" class="form-control" name="CustomCode" maxlength="255">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="CustomName">客户名称</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="CustomName" class="form-control" name="CustomName" maxlength="255">
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="WFUrl">工作流地址</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="WFUrl" class="form-control" name="WFUrl" maxlength="255">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="ERPUrl">Erp地址</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="ERPUrl" class="form-control" name="ERPUrl" maxlength="255">
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="ERPVersion">Erp版本</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="ERPVersion" class="form-control" name="ERPVersion" maxlength="255">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="DBServerName">数据库地址</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="DBServerName" class="form-control" name="DBServerName" maxlength="255">
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="DBName">数据库名称</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="DBName" class="form-control" name="DBName" maxlength="255">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="DBUserName">数据库用户名</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="DBUserName" class="form-control" name="DBUserName" maxlength="255">
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="DBSaPassword">数据库密码</label>
+                    <div class="col-sm-8">
+                        <input type="text" id="DBSaPassword" class="form-control" name="DBSaPassword" maxlength="255">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <input type="button" name="test_dbconn" data-toggle="modal" data-target="#myModal" class="btn btn-info" value="测试连接" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="col-sm-2" for="UpFilesAddress">UpFiles地址</label>
+                    <div class="col-sm-10" style="padding: 0px 10px;">
+                        <input type="text" id="UpFilesAddress" class="form-control" name="UpFilesAddress" maxlength="255">
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="col-sm-2" for="UpFilesAddress">工作流站点地址</label>
+                    <div class="col-sm-10" style="padding: 0px 10px;">
+                        <input type="text" id="WFAddress" class="form-control" name="WFAddress" maxlength="255">
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-5"></div>
+                <div class="col-sm-2">
+                    <input type="button" data-toggle="modal" data-target="#myModal" class="btn btn-success" value="提 交" />
+                </div>
+                <div class="col-sm-5"></div>
+            </div>
+        </div>
+
+
+    </form>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div id="alert_content" class="alert alert-success" role="alert"></div>
+    </div>
+
+</body>
+</html>
