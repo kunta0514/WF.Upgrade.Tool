@@ -1,4 +1,4 @@
-﻿<Window x:Class="WFUpdatetool.MainWindow"
+﻿<Window x:Class="WF.Upgrade.Tool.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,8 +6,61 @@
         xmlns:local="clr-namespace:WF.Upgrade.Tool"
         xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="v2.0" Height="768" Width="1024">
     <Grid>
-        <cefSharp:ChromiumWebBrowser Grid.Row="0" Name="cwb" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition />
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Canvas Height="75" Name="dp" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Top">
+            <Label Height="48"  Canvas.Top="27" Width="130" Canvas.Left="10">
+                <Label.Background>
+                    <ImageBrush ImageSource="resource/img/LOGO.png"></ImageBrush>
+                </Label.Background>
+            </Label>
+            <Label Content="工作流升级工具" FontSize="30" Canvas.Left="145" Canvas.Top="27"></Label>
+            <Button Height="32" Width="30"  Canvas.Right="32" BorderBrush="White" Canvas.Left="956" Canvas.Top="33">
+                <Button.Background>
+                    <ImageBrush ImageSource="resource/img/shezhi.png"></ImageBrush>
+                </Button.Background>
+            </Button>
+            <DockPanel Canvas.Left="631" Canvas.Top="46" Width="320">
+                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White">首页</Button>
+                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White">数据库检测</Button>
+                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White">分类检测</Button>
+                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White">升级</Button>
+            </DockPanel>
+        </Canvas>
+        <Grid Grid.Row="1" Grid.ColumnSpan="1" Height="10">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#F55123" Offset="0.2"/>
+                    <GradientStop Color="#F5A623" Offset="0.35"/>
+                    <GradientStop Color="#6FC04A" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+        <Grid Grid.Row="2" Grid.ColumnSpan="1">
+            <cefSharp:ChromiumWebBrowser x:Name="cef"  Address="http://www.baidu.com/" />
+
+        </Grid>
+        <Canvas Grid.Row="3" Grid.ColumnSpan="2">
+            <Canvas.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#6BB341 " Offset="0.5"/>
+                    <GradientStop Color="#A1D583" Offset="1"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
+            <Label Height="30" Foreground="White">共扫描：4项</Label>
+            <Label Height="30" Foreground="White" Canvas.Left="105">发现问题：200个</Label>
+        </Canvas>
+
+
+
     </Grid>
 </Window>

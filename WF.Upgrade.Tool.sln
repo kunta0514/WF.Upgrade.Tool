@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowUpgradeLib", "..\wo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFUpgradeConsole", "..\workflow\01 product\00_WF整体\08 源代码\工作流升级工具2.0\WFUpgradeConsole\WFUpgradeConsole.csproj", "{C0FEAF77-2CB1-4233-86FE-4A40F7CFA303}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WF.Upgrade.Web", "WF.Upgrade.Web\WF.Upgrade.Web.csproj", "{98B1DB1D-D08E-4A8E-AEC0-284C29FD07C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,18 @@ Global
 		{C0FEAF77-2CB1-4233-86FE-4A40F7CFA303}.Release|x64.Build.0 = Release|Any CPU
 		{C0FEAF77-2CB1-4233-86FE-4A40F7CFA303}.Release|x86.ActiveCfg = Release|Any CPU
 		{C0FEAF77-2CB1-4233-86FE-4A40F7CFA303}.Release|x86.Build.0 = Release|Any CPU
+		{98B1DB1D-D08E-4A8E-AEC0-284C29FD07C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98B1DB1D-D08E-4A8E-AEC0-284C29FD07C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98B1DB1D-D08E-4A8E-AEC0-284C29FD07C1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{98B1DB1D-D08E-4A8E-AEC0-284C29FD07C1}.Debug|x64.Build.0 = Debug|Any CPU
+		{98B1DB1D-D08E-4A8E-AEC0-284C29FD07C1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{98B1DB1D-D08E-4A8E-AEC0-284C29FD07C1}.Debug|x86.Build.0 = Debug|Any CPU
+		{98B1DB1D-D08E-4A8E-AEC0-284C29FD07C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98B1DB1D-D08E-4A8E-AEC0-284C29FD07C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98B1DB1D-D08E-4A8E-AEC0-284C29FD07C1}.Release|x64.ActiveCfg = Release|Any CPU
+		{98B1DB1D-D08E-4A8E-AEC0-284C29FD07C1}.Release|x64.Build.0 = Release|Any CPU
+		{98B1DB1D-D08E-4A8E-AEC0-284C29FD07C1}.Release|x86.ActiveCfg = Release|Any CPU
+		{98B1DB1D-D08E-4A8E-AEC0-284C29FD07C1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
