@@ -156,6 +156,7 @@
     </Compile>
     <Compile Include="Backend\CheckRuleService.cs" />
     <Compile Include="Backend\FormMainData.cs" />
+    <Compile Include="Backend\helper\JsonHelp.cs" />
     <Compile Include="Backend\helper\SQLiteHelper.cs" />
     <Compile Include="Backend\LocalDBService.cs" />
     <Compile Include="Backend\SiteService.cs" />
@@ -185,38 +186,62 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="resource\img\LOGO.png" />
-    <Resource Include="resource\img\shezhi.png" />
-    <Content Include="View\Scripts\jquery-3.1.0.min.map">
+    <Resource Include="resource\assets\img\LOGO.png" />
+    <Resource Include="resource\assets\img\shezhi.png" />
+    <Content Include="resource\assets\css\datatables.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resource\assets\js\app.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resource\assets\js\datatables.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resource\assets\js\modal.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resource\assets\js\toast.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resource\html\check\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resource\html\form\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resource\Scripts\jquery-3.1.0.min.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="app.manifest" />
+    <Content Include="database\db.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="结构说明.md" />
-    <None Include="View\Scripts\jquery-3.1.0.slim.min.map">
+    <None Include="resource\Scripts\jquery-3.1.0.slim.min.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Resource Include="View\fonts\glyphicons-halflings-regular.ttf">
+    <Resource Include="resource\fonts\glyphicons-halflings-regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Content Include="View\Content\bootstrap-theme.css.map">
+    <Content Include="resource\Content\bootstrap-theme.css.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\Content\bootstrap-theme.min.css.map">
+    <Content Include="resource\Content\bootstrap-theme.min.css.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\Content\bootstrap.css.map">
+    <Content Include="resource\Content\bootstrap.css.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\Content\bootstrap.min.css.map">
+    <Content Include="resource\Content\bootstrap.min.css.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\fonts\glyphicons-halflings-regular.eot">
+    <Content Include="resource\fonts\glyphicons-halflings-regular.eot">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\fonts\glyphicons-halflings-regular.woff">
+    <Content Include="resource\fonts\glyphicons-halflings-regular.woff">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\fonts\glyphicons-halflings-regular.woff2">
+    <Content Include="resource\fonts\glyphicons-halflings-regular.woff2">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
@@ -230,49 +255,49 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="View\Content\bootstrap-theme.css">
+    <Content Include="resource\Content\bootstrap-theme.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\Content\bootstrap-theme.min.css">
+    <Content Include="resource\Content\bootstrap-theme.min.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\Content\bootstrap.css">
+    <Content Include="resource\Content\bootstrap.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\Content\bootstrap.min.css">
+    <Content Include="resource\Content\bootstrap.min.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\fonts\glyphicons-halflings-regular.svg">
+    <Content Include="resource\fonts\glyphicons-halflings-regular.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\html\site\index.html">
+    <Content Include="resource\html\site\index.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\resource\css\style.css">
+    <Content Include="resource\assets\css\style.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\resource\js\template.js">
+    <Content Include="resource\assets\js\template.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\Scripts\bootstrap.js">
+    <Content Include="resource\Scripts\bootstrap.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\Scripts\bootstrap.min.js">
+    <Content Include="resource\Scripts\bootstrap.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\Scripts\jquery-3.1.0.intellisense.js">
+    <Content Include="resource\Scripts\jquery-3.1.0.intellisense.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\Scripts\jquery-3.1.0.js">
+    <Content Include="resource\Scripts\jquery-3.1.0.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\Scripts\jquery-3.1.0.min.js">
+    <Content Include="resource\Scripts\jquery-3.1.0.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\Scripts\jquery-3.1.0.slim.js">
+    <Content Include="resource\Scripts\jquery-3.1.0.slim.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\Scripts\jquery-3.1.0.slim.min.js">
+    <Content Include="resource\Scripts\jquery-3.1.0.slim.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -289,26 +314,22 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="View\Scripts\typings\es6-shim\es6-shim.d.ts">
+    <TypeScriptCompile Include="resource\Scripts\typings\es6-shim\es6-shim.d.ts">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\workflow\01 product\00_WF整体\08 源代码\工作流升级工具2.0\WF.DbProvider\WF.DbProvider.csproj">
+    <ProjectReference Include="..\WF.DbProvider\WF.DbProvider.csproj">
       <Project>{17876af6-0d2c-44c7-82ee-2520c3cf4bf0}</Project>
       <Name>WF.DbProvider</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\workflow\01 product\00_WF整体\08 源代码\工作流升级工具2.0\WF.Upgrade.Model\WF.Upgrade.Model.csproj">
+    <ProjectReference Include="..\WF.Upgrade.Model\WF.Upgrade.Model.csproj">
       <Project>{0f213748-b365-4293-8096-e0033b573392}</Project>
       <Name>WF.Upgrade.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\workflow\01 product\00_WF整体\08 源代码\工作流升级工具2.0\WF.Upgrade.Public\WF.Upgrade.Public.csproj">
+    <ProjectReference Include="..\WF.Upgrade.Public\WF.Upgrade.Public.csproj">
       <Project>{2ac2407a-f3fc-4c6e-94db-0ea5ed5eea42}</Project>
       <Name>WF.Upgrade.Public</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\workflow\01 product\00_WF整体\08 源代码\工作流升级工具2.0\WorkflowUpgradeLib\WorkflowUpgradeLib.csproj">
-      <Project>{64d82aee-cc0a-4182-913f-90743ffc80ac}</Project>
-      <Name>WorkflowUpgradeLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\WF.Upgrade.Web\WF.Upgrade.Web.csproj">
       <Project>{98b1db1d-d08e-4a8e-aec0-284c29fd07c1}</Project>
@@ -317,8 +338,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\" />
-    <Folder Include="database\" />
-    <Folder Include="vendor\" />
+    <Folder Include="resource\vendor\" />
+    <Folder Include="View\" />
     <Folder Include="VModel\" />
   </ItemGroup>
   <ItemGroup>

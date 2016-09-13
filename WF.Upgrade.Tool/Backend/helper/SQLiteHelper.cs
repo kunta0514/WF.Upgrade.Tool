@@ -13,10 +13,9 @@ namespace WF.Upgrade.Tool.Backend
     ///   
     public class SQLiteHelper
     {
-        private static SQLiteHelper sqlitehelper;
-        private static string _connectionString = "Data Source =" + Environment.CurrentDirectory + "/mytool.db";
-        private static SQLiteConnection _connection = new SQLiteConnection(_connectionString);
-
+        private static SQLiteHelper sqlitehelper;        
+        private static SQLiteConnection _connection = new SQLiteConnection(connectionString);
+        public static readonly string connectionString = "Data Source =" + Environment.CurrentDirectory + "/database/tool.db";
         private SQLiteHelper()
         {
             //   
@@ -31,6 +30,8 @@ namespace WF.Upgrade.Tool.Backend
             }
             return sqlitehelper;
         }
+
+        
 
         #region 静态私有方法  
         ///   
@@ -101,7 +102,7 @@ namespace WF.Upgrade.Tool.Backend
         ///    
         public static int ExecuteNonQuery(CommandType commandType, string commandText)
         {
-            return ExecuteNonQuery(_connectionString, commandType, commandText, (SQLiteParameter[])null);
+            return ExecuteNonQuery(connectionString, commandType, commandText, (SQLiteParameter[])null);
         }
 
         public static int ExecuteNonQuery(string connectionString, CommandType commandType, string commandText)
@@ -135,9 +136,15 @@ namespace WF.Upgrade.Tool.Backend
         #endregion
 
         #region ExecuteDataSet 执行SQL查询，并将返回数据填充到DataSet  
+
+        public static DataSet ExecuteDataset(string commandText)
+        {
+            return ExecuteDataset(connectionString, CommandType.Text, commandText, (SQLiteParameter[])null);
+        }
+
         public static DataSet ExecuteDataset(CommandType commandType, string commandText)
         {
-            return ExecuteDataset(_connectionString, commandType, commandText, (SQLiteParameter[])null);
+            return ExecuteDataset(connectionString, commandType, commandText, (SQLiteParameter[])null);
         }
 
         public static DataSet ExecuteDataset(string connectionString, CommandType commandType, string commandText)
@@ -206,7 +213,7 @@ namespace WF.Upgrade.Tool.Backend
         }
         public static SQLiteDataReader ExecuteReader(CommandType commandType, string commandText)
         {
-            return ExecuteReader(_connectionString, commandType, commandText, (SQLiteParameter[])null);
+            return ExecuteReader(connectionString, commandType, commandText, (SQLiteParameter[])null);
         }
         ///   
         /// 读取数据后将自动关闭连接   
@@ -236,7 +243,7 @@ namespace WF.Upgrade.Tool.Backend
 
         public static int ExecuteScalar(CommandType commandType, string commandText)
         {
-            return ExecuteScalar(_connectionString, commandType, commandText, (SQLiteParameter[])null);
+            return ExecuteScalar(connectionString, commandType, commandText, (SQLiteParameter[])null);
         }
         public static int ExecuteScalar(string connectionString, CommandType commandType, string commandText)
         {

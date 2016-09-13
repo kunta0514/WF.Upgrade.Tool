@@ -4,52 +4,54 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
-using WF.Upgrade.Model;
-using WF.Upgrade.Public;
+using WF.Upgrade.Model.DbUp;
 
-namespace WF.Upgrade.Tool.Backend
+namespace WF.Upgrade.Public
 {
-    public class UpDbService
+    public class DbUpInfo
     {
         private static readonly string _configPath = Utility.GetBaseDirectory() + "DbUpForm/UpDbInfo.config";
-        public UpDbService()
-        {
-           
-        }
 
-        public  string GetUpDbInfo()
+
+        public string GetUpDbInfo()
         {
             var info = GetUpDbInfoEntity();
 
             return JsonConvert.SerializeObject(info);
         }
 
-        private UpDbInfo GetUpDbInfoEntity()
+        public DbUpSet GetUpDbInfoEntity()
         {
-            UpDbInfo config;
+            try
+            {
+                DbUpSet config;
 
-            if (!File.Exists(_configPath))
+                if (!File.Exists(_configPath))
+                {
+                    return null;
+                }
+
+                using (var fs = new FileStream(_configPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    var xsl = new XmlSerializer(typeof (DbUpSet));
+                    config = (DbUpSet) xsl.Deserialize(fs);
+                }
+                return config;
+            }
+            catch (Exception ex)
             {
                 return null;
             }
-
-            using (var fs = new FileStream(_configPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
-                var xsl = new XmlSerializer(typeof(UpDbInfo));
-                config = (UpDbInfo)xsl.Deserialize(fs);
-            }
-            return config;
         }
 
         public string SaveUpDbInfo(string data)
         {
             try
             {
-                var info = JsonConvert.DeserializeObject<UpDbInfo>(data);
+                var info = JsonConvert.DeserializeObject<DbUpSet>(data);
 
                 if (!File.Exists(_configPath))
                 {
@@ -60,18 +62,18 @@ namespace WF.Upgrade.Tool.Backend
 
                 xml.Load(_configPath);
 
-                xml.SelectSingleNode("UpDbInfo/old_server").InnerText = info.old_server;
-                xml.SelectSingleNode("UpDbInfo/old_dbname").InnerText = info.old_dbname;
-                xml.SelectSingleNode("UpDbInfo/old_username").InnerText = info.old_username;
-                xml.SelectSingleNode("UpDbInfo/old_password").InnerText = info.old_password;
+                xml.SelectSingleNode("DbUpSet/old_server").InnerText = info.old_server;
+                xml.SelectSingleNode("DbUpSet/old_dbname").InnerText = info.old_dbname;
+                xml.SelectSingleNode("DbUpSet/old_username").InnerText = info.old_username;
+                xml.SelectSingleNode("DbUpSet/old_password").InnerText = info.old_password;
 
-                xml.SelectSingleNode("UpDbInfo/new_server").InnerText = info.new_server;
-                xml.SelectSingleNode("UpDbInfo/new_dbname").InnerText = info.new_dbname;
-                xml.SelectSingleNode("UpDbInfo/new_username").InnerText = info.new_username;
-                xml.SelectSingleNode("UpDbInfo/new_password").InnerText = info.new_password;
+                xml.SelectSingleNode("DbUpSet/new_server").InnerText = info.new_server;
+                xml.SelectSingleNode("DbUpSet/new_dbname").InnerText = info.new_dbname;
+                xml.SelectSingleNode("DbUpSet/new_username").InnerText = info.new_username;
+                xml.SelectSingleNode("DbUpSet/new_password").InnerText = info.new_password;
 
-                xml.SelectSingleNode("UpDbInfo/erp_version").InnerText = info.erp_version;
-                xml.SelectSingleNode("UpDbInfo/erp_source").InnerText = info.erp_source;
+                xml.SelectSingleNode("DbUpSet/erp_version").InnerText = info.erp_version.ToString();
+                xml.SelectSingleNode("DbUpSet/erp_source").InnerText = info.erp_source;
 
                 xml.Save(_configPath);
 
@@ -85,7 +87,7 @@ namespace WF.Upgrade.Tool.Backend
             }
         }
 
-        private static string Test(UpDbInfo info)
+        private static string Test(DbUpSet info)
         {
             var sb = new StringBuilder();
 
@@ -146,20 +148,5 @@ namespace WF.Upgrade.Tool.Backend
 
             return sb.ToString();
         }
-        
-    }
-    public class UpDbInfo
-    {
-        public string new_server { get; set; }
-        public string new_username { get; set; }
-        public string new_password { get; set; }
-        public string new_dbname { get; set; }
-        public string old_server { get; set; }
-        public string old_username { get; set; }
-        public string old_password { get; set; }
-        public string old_dbname { get; set; }
-        public string erp_version { get; set; }
-
-        public string erp_source { get; set; }
     }
 }

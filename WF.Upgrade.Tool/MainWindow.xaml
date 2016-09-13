@@ -20,23 +20,23 @@
         <Canvas Height="75" Name="dp" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Top">
             <Label Height="48"  Canvas.Top="27" Width="130" Canvas.Left="10">
                 <Label.Background>
-                    <ImageBrush ImageSource="resource/img/LOGO.png"></ImageBrush>
+                    <ImageBrush ImageSource="resource/assets/img/LOGO.png"></ImageBrush>
                 </Label.Background>
             </Label>
             <Label Content="工作流升级工具" FontSize="30" Canvas.Left="145" Canvas.Top="27"></Label>
-            <Button Height="32" Width="30"  Canvas.Right="32" BorderBrush="White" Canvas.Left="956" Canvas.Top="33">
+            <Button Height="32" Width="30"  Canvas.Right="32" BorderBrush="White" Canvas.Top="33" BorderThickness="0" VerticalAlignment="Center" >
                 <Button.Background>
-                    <ImageBrush ImageSource="resource/img/shezhi.png"></ImageBrush>
+                    <ImageBrush ImageSource="resource/assets/img/shezhi.png"></ImageBrush>
                 </Button.Background>
             </Button>
-            <DockPanel Canvas.Left="631" Canvas.Top="46" Width="320">
+            <DockPanel  Canvas.Right="62" Canvas.Top="46" Width="320">
                 <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White">首页</Button>
                 <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White">数据库检测</Button>
                 <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White">分类检测</Button>
                 <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White">升级</Button>
             </DockPanel>
         </Canvas>
-        <Grid Grid.Row="1" Grid.ColumnSpan="1" Height="10">
+        <Grid Grid.Row="1" Grid.ColumnSpan="1" Height="10" >
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#F55123" Offset="0.2"/>
@@ -45,8 +45,8 @@
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
-        <Grid Grid.Row="2" Grid.ColumnSpan="1">
-            <cefSharp:ChromiumWebBrowser x:Name="cef"  Address="http://www.baidu.com/" />
+        <Grid Grid.Row="2" Grid.ColumnSpan="1" Margin="0,20,0,0">
+            <cefSharp:ChromiumWebBrowser x:Name="cef" />
 
         </Grid>
         <Canvas Grid.Row="3" Grid.ColumnSpan="2">

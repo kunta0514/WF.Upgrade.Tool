@@ -9,16 +9,17 @@ using WF.DbProvider;
 using WF.Upgrade.Model;
 using WF.Upgrade.Model.CustomAttribute;
 using WF.Upgrade.Public;
-
+using System.Windows;
+using System.Data;
 
 namespace WF.Upgrade.Tool.Backend
 {
     public class CheckRuleService
     {
-        public CheckRuleService()
-        {
-            new ConnectionScope(InitDb.ConnectionStr());
-        }
+        //public CheckRuleService()
+        //{
+        //    new ConnectionScope(InitDb.ConnectionStr());
+        //}
 
         private List<RuleInfo> RuleInfoList { get; set; }
 
@@ -26,7 +27,19 @@ namespace WF.Upgrade.Tool.Backend
 
         private Dictionary<string,int>  SelectedRuleKind = new Dictionary<string, int>();
 
-        public string GetRuleInfoList(string type)
+        //public void showMessage(string msg)
+        //{
+        //    MessageBox.Show(msg);
+        //}
+
+        public void getCheckList()
+        {
+            string sql = @"select * from p_check_rule";
+            DataSet ds = SQLiteHelper.ExecuteDataset(sql);
+            DataTable dt = ds.Tables[0];
+        }
+
+        public string getRuleInfoList2(string type)
         {
             try
             {

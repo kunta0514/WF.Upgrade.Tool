@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WF.Upgrade.Tool.Backend;
 
 namespace WF.Upgrade.Tool
 {
@@ -29,14 +30,15 @@ namespace WF.Upgrade.Tool
         }
 
         private void init()
-        {
-            var Address = Environment.CurrentDirectory + @"\view\html\site\index.html?Rand=" + DateTime.Now;
+        {            
+            var Address = Environment.CurrentDirectory + @"\resource\html\check\index.html?Rand=" + DateTime.Now;
             //var Address = "http://10.5.106.25:1111/";
-            //cef.Address = Environment.CurrentDirectory + @"\view\html\site\index.html?Rand=" + DateTime.Now;
+            //var Address = Environment.CurrentDirectory + @"\resource\html\site\index.html?Rand=" + DateTime.Now;
 
             cef.Address = Address;
 
-            cef.RegisterJsObject("callbackObj", new CallbackObjectForJs());
+            //cef.RegisterJsObject("callbackObj", new CallbackObjectForJs());
+            cef.RegisterJsObject("CheckRuleService", new CheckRuleService());
             //cef.PreviewTextInput += (o, e) =>
             //{
             //    foreach (var character in e.Text)
@@ -53,6 +55,7 @@ namespace WF.Upgrade.Tool
 
             //cwb.RegisterJsObject("SiteInfoData", new SiteService());
             //cwb.
+            LocalDBService.init();
         }
 
         public class CallbackObjectForJs
