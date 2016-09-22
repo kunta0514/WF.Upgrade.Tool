@@ -184,6 +184,31 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="高保真\index.html" />
+    <Content Include="高保真\links\page-1-修复过程.html" />
+    <Content Include="高保真\links\page-1-升级前.html" />
+    <Content Include="高保真\links\page-1-站点设置.html" />
+    <Content Include="高保真\links\page-1-表单检测.html" />
+    <Content Include="高保真\links\page-1-首页.html" />
+    <Content Include="高保真\links\page-1-首页_1.html" />
+    <Resource Include="高保真\preview\page-1-修复过程.png" />
+    <Resource Include="高保真\preview\page-1-升级前.png" />
+    <Resource Include="高保真\preview\page-1-站点设置.png" />
+    <Resource Include="高保真\preview\page-1-表单检测.png" />
+    <Resource Include="高保真\preview\page-1-首页.png" />
+    <Resource Include="高保真\preview\page-1-首页_1.png" />
+    <Resource Include="高保真\preview\小一号\page-1-首页.png" />
+    <Resource Include="高保真\preview\小一号\page-1-首页_1.png" />
+    <Resource Include="高保真\图片资源\BG.png" />
+    <Resource Include="高保真\图片资源\dui.png" />
+    <Resource Include="高保真\图片资源\fenxi.png" />
+    <Resource Include="高保真\图片资源\jiance.png" />
+    <Resource Include="高保真\图片资源\Line.png" />
+    <Resource Include="高保真\图片资源\line_2.png" />
+    <Resource Include="高保真\图片资源\LOGO.png" />
+    <Resource Include="高保真\图片资源\shezhi.png" />
+    <Resource Include="高保真\图片资源\sousuo.png" />
+    <Resource Include="高保真\图片资源\xiangqing.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -349,7 +374,9 @@
       <Name>WF.Upgrade.Public</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="resource\NewFolder1\" />
+  </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
