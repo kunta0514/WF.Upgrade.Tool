@@ -228,6 +228,7 @@
     <None Include="Config\HtmlRulesConfig.config" />
     <None Include="Config\site.json" />
     <None Include="Config\SiteInfo.config" />
+    <None Include="README.md" />
     <None Include="结构说明.md" />
     <None Include="resource\Scripts\jquery-3.1.0.slim.min.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
