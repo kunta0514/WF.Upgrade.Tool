@@ -1,13 +1,28 @@
 {
-  "compilerOptions": {
-    "noImplicitAny": false,
-    "noEmitOnError": true,
-    "removeComments": false,
-    "sourceMap": true,
-    "target": "es5"
-  },
-  "exclude": [
-    "node_modules",
-    "wwwroot"
-  ]
+  "connections": {
+    "sqlite": {
+      "driver": "sqlite",
+      "database": "/mytool.db"
+    },
+    "mysql": {
+      "driver": "mysql",
+      "host": "10.5.106.56",
+      "database": "task",
+      "username": "root",
+      "password": "123456",
+      "charset": "utf8",
+      "collation": "utf8_general_ci",
+      "prefix": "",
+      "strict": false
+    },
+    "sqlsrv": {
+      "driver": "sqlsrv",
+      "host": "10.5.10.38\\SQL2008R2",
+      "database": "TaskManager",
+      "username": "sa",
+      "password": "95938",
+      "charset": "utf8",
+      "prefix": ""
+    }
+  }
 }

@@ -32,24 +32,22 @@ namespace WF.Upgrade.Tool.Backend
         //    MessageBox.Show(msg);
         //}
 
-        public void getCheckList()
+        public string getCheckRuleList(string type)
         {
-            string sql = @"select * from p_check_rule";
+            string sql = string.Format(@"select * from p_check_rule where type = '{0}'", type);
             DataSet ds = SQLiteHelper.ExecuteDataset(sql);
             DataTable dt = ds.Tables[0];
+            return JsonHelp.ToJson(dt);
         }
 
-        public string getRuleInfoList2(string type)
+        public void InitCheckRule()
         {
             try
             {
-
                 if (RuleInfoList == null)
                 {
                     var assembyle = Assembly.Load("WF.CheckRule.Business");
-
                     var typeList = assembyle.GetTypes();
-
                     var ruleInfoList = new List<RuleInfo>();
 
                     foreach (Type typeRule in typeList.Where(typeRule => typeof (ICheckRule).IsAssignableFrom(typeRule))  )
@@ -87,16 +85,14 @@ namespace WF.Upgrade.Tool.Backend
                         {
                             continue;
                         }
-                        if (info.CheckRuleType == type || info.CheckRuleType == "all")
-                        {
-                            info.IsCheck = false;
-                            ruleInfoList.Add(info);
-                            CheckRuleTypeList.Add(info.CheckRuleName, typeRule);
-                        }                        
+                        info.IsCheck = false;
+                        ruleInfoList.Add(info);
+                        CheckRuleTypeList.Add(info.CheckRuleName, typeRule);
+                                           
                     }
                     RuleInfoList = ruleInfoList;
-                }
-              
+                    sync_check_rule(RuleInfoList);
+                }              
                 var result = new
                              {
                                  result = 1,
@@ -104,30 +100,19 @@ namespace WF.Upgrade.Tool.Backend
                                  data = RuleInfoList,
                                  checkRuleKindList = RuleInfoList.Select(info => info.CheckRuleKind).Distinct().ToList()
                              };
-                sync_check_rule(RuleInfoList);
-                return JsonConvert.SerializeObject(result);
+                
+                //return JsonConvert.SerializeObject(result);
             }
             catch(Exception ex)
             {
-                return JsonConvert.SerializeObject(new
-                             {
-                                 result = 0,
-                                 message = ex.Message
-                             });
+                throw ex;
+                //return JsonConvert.SerializeObject(new
+                //             {
+                //                 result = 0,
+                //                 message = ex.Message
+                //             });
             }
-        }
-
-        private void sync_check_rule(List<RuleInfo> ruleInfoList) {
-            foreach (var item in ruleInfoList) {
-                //检查规则是否已经存在
-                string sql = string.Format(@"select 1 from p_check_rule where name = '{0}'", item.CheckRuleName);
-                if (SQLiteHelper.ExecuteScalar(System.Data.CommandType.Text, sql) != 1)
-                {
-                    sql = string.Format(@"insert into p_check_rule(name,kind,type,remark) values ('{0}','{1}','{2}','{3}')", item.CheckRuleName, item.CheckRuleKind, item.CheckRuleType, item.CheckRuleRemark);
-                    SQLiteHelper.ExecuteNonQuery(System.Data.CommandType.Text, sql);
-                }
-            }
-        }
+        }        
 
         public string GetRuleInfoListSearch(string input)
         {
@@ -142,7 +127,7 @@ namespace WF.Upgrade.Tool.Backend
             
         }
 
-        public string CheckRule(string ruleName)
+        public string checkRule(string ruleName)
         {
             try
             {
@@ -165,7 +150,6 @@ namespace WF.Upgrade.Tool.Backend
 
         private RuleInfo Check(string ruleName)
         {
-
             var type = CheckRuleTypeList.Where(kv => kv.Key == ruleName).First().Value;
 
             var ruleInfo = RuleInfoList.Find(t => t.CheckRuleName == ruleName);
@@ -184,7 +168,6 @@ namespace WF.Upgrade.Tool.Backend
                              {
                                  ErrorTitle = "运行规则失败！",
                                  ErrorList = new List<string> {ex.Message}
-
                              };
                 }
                 //结果记录
@@ -193,10 +176,30 @@ namespace WF.Upgrade.Tool.Backend
                 ruleInfo.CheckResult = result;
             }
             ruleInfo.CheckEnd = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
+            sync_check_rule(ruleInfo);
             return ruleInfo;
         }
 
+        private void sync_check_rule(RuleInfo ruleinfo)
+        {
+            string sql = string.Format(@"update p_check_rule set begin_time={0},end_time={1},result_count={2},is_check={3},check_count={4},err_code={5},err_msg={6} where name={7}", 
+                ruleinfo.CheckRuleName);
+        }
+
+        private void sync_check_rule(List<RuleInfo> ruleInfoList)
+        {
+            foreach (var item in ruleInfoList)
+            {
+                //检查规则是否已经存在
+                string sql = string.Format(@"select 1 from p_check_rule where name = '{0}'", item.CheckRuleName);
+                if (SQLiteHelper.ExecuteScalar(System.Data.CommandType.Text, sql) != 1)
+                {
+                    sql = string.Format(@"insert into p_check_rule(name,kind,type,remark) values ('{0}','{1}','{2}','{3}')", item.CheckRuleName, item.CheckRuleKind, item.CheckRuleType, item.CheckRuleRemark);
+                    SQLiteHelper.ExecuteNonQuery(System.Data.CommandType.Text, sql);
+                }
+            }
+        }
+        
         public string ViewRule(string ruleName)
         {
             var info = RuleInfoList.Find(r => r.CheckRuleName == ruleName);

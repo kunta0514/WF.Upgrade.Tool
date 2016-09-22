@@ -20,13 +20,13 @@
         <Canvas Height="75" Name="dp" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Top">
             <Label Height="48"  Canvas.Top="27" Width="130" Canvas.Left="10">
                 <Label.Background>
-                    <ImageBrush ImageSource="resource/assets/img/LOGO.png"></ImageBrush>
+                    <ImageBrush ImageSource="resource/img/LOGO.png"></ImageBrush>
                 </Label.Background>
             </Label>
             <Label Content="工作流升级工具" FontSize="30" Canvas.Left="145" Canvas.Top="27"></Label>
-            <Button Height="32" Width="30"  Canvas.Right="32" BorderBrush="White" Canvas.Top="33" BorderThickness="0" VerticalAlignment="Center" >
+            <Button Height="32" Width="30"  Canvas.Right="32" BorderBrush="White" Canvas.Top="33" BorderThickness="0" VerticalAlignment="Center" Click="Button_Click" >
                 <Button.Background>
-                    <ImageBrush ImageSource="resource/assets/img/shezhi.png"></ImageBrush>
+                    <ImageBrush ImageSource="resource/img/shezhi.png"></ImageBrush>
                 </Button.Background>
             </Button>
             <DockPanel  Canvas.Right="62" Canvas.Top="46" Width="320">
@@ -46,7 +46,14 @@
             </Grid.Background>
         </Grid>
         <Grid Grid.Row="2" Grid.ColumnSpan="1" Margin="0,20,0,0">
-            <cefSharp:ChromiumWebBrowser x:Name="cef" />
+            <cefSharp:ChromiumWebBrowser x:Name="cef"  Opacity="{Binding ElementName=opacitySlider, Path=Value}"
+                                  Address="{Binding Address, Mode=TwoWay}"
+                                  Title="{Binding Title, Mode=OneWayToSource}"
+                                  AllowDrop="True"
+                                  WebBrowser="{Binding WebBrowser, Mode=OneWayToSource}"
+                                  RenderOptions.BitmapScalingMode="{Binding ElementName=scalingModeComboBox, Path=SelectedItem}">
+  
+            </cefSharp:ChromiumWebBrowser>
 
         </Grid>
         <Canvas Grid.Row="3" Grid.ColumnSpan="2">

@@ -5,15 +5,15 @@
     <meta charset="utf-8" />
     <title></title>
     <link href="../../Content/bootstrap.css" rel="stylesheet">    
-    <link href="../../assets/css/datatables.css" rel="stylesheet">
-    <link href="../../assets/css/style.css" rel="stylesheet">
+    <link href="../../css/datatables.css" rel="stylesheet">
+    <link href="../../css/toast.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
 
     <script src="../../Scripts/jquery-3.1.0.js"></script>
     <script src="../../Scripts/bootstrap.js"></script>
-    <script src="../../assets/js/template.js"></script>
-    <script src="../../assets/js/datatables.js"></script>
-    <script src="../../assets/js/modal.js"></script>
-    <script src="../../assets/js/toast.js"></script>
+    <script src="../../js/template.js"></script>
+    <script src="../../js/datatables.js"></script>
+    <script src="../../js/toast.js"></script>
 </head>
 <body>
     <div class="container-fluid">
@@ -51,20 +51,20 @@
     </div>
     <script id="list-table-temp" type="text/html">
         {{each list as item key}}
-        <tr guid="{{item.CheckRuleName}}" name="{{item.CheckRuleName}}">
+        <tr guid="{{item.id}}" name="{{item.name}}">
             <td>
                 <div class="checkbox">
                     <label style="margin-left: 9px;">
-                        <input type="checkbox" guid="{{item.CheckRuleName}}" />
+                        <input type="checkbox" guid="{{item.id}}" />
                     </label>
                 </div>
             </td>
-            <td>{{item.CheckRuleName}}</td>
-            <td>{{item.CheckRuleKind}}</td>
-            <td>{{item.CheckRuleRemark}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.kind}}</td>
+            <td>{{item.remark}}</td>
             <td>
-                <a class="checking" data-toggle="modal" data-target="#myModal" href="#">检测</a>
-                <a class="view" href="#">详情</a>
+                <a name="check" data-toggle="modal" data-target="#myModal" href="#">检测</a>
+                <a name="view_check" href="#">详情</a>
             </td>
         </tr>
         {{/each}}
@@ -86,66 +86,93 @@
         //TODO:使用HTML (DOM) sourced data，中间部分用template.js实现(纯静态页面真蛋疼！)
         function callback() {
             var check_list;
-            var requestStr = CheckRuleService.getRuleInfoList2("before-up");
+            var requestStr = CheckRuleService.getCheckList("before-up");
             var requestData = JSON.parse(requestStr);
             check_list = requestData;
-
-            if (requestData.result == "0") {
-                $.toast(requestData.message, "error");
-            }
-            var html = template("list-table-temp", { list: requestData.data });
-            $('#list-table').html(html);
+            //$('#list-table').html(requestStr);
+            //if (requestData.result == "0") {
+            //    $.toast(requestData.message, "error");
+            //}
+            //var html = template("list-table-temp", { list: check_list });
+            //$('#list-table').html(html);
         }
-
+        var tt;
         $(function () {
             var check_list;
-            alert(1);
-            var requestStr = CheckRuleService.getRuleInfoList2("before-up");
-            alert(2);
-            var requestData = JSON.parse(requestStr);
-            check_list = requestData;
-            
-            if (requestData.result == "0") {
-                $.toast(requestData.message, "error");
-            }
-            var html = template("list-table-temp", { list: requestData.data }); 
+            var requestStr = CheckRuleService.getCheckRuleList("before-up");
+            var check_list = JSON.parse(requestStr);
+
+            var html = template("list-table-temp", { list: check_list });
             $('#list-table').html(html);
+
+            tt = $('#tb_check').DataTable({
+                //data:dataset,
+                lengthMenu: [50, 100, "ALL"],//这里也可以设置分页，但是不能设置具体内容，只能是一维或二维数组的方式，所以推荐下面language里面的写法。
+                paging: false,//分页
+                ordering: false,//是否启用排序
+                //        order: [ [ 0, 'asc' ]],
+                //                searching: true,//搜索
+                dom: "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                language: {
+                    lengthMenu: '每页<select class="form-control input-xsmall">' + '<option value="15">15</option>' + '<option value="30">30</option>' + '<option value="50">50</option>' + '<option value="100">100</option>' + '</select>条记录',//左上角的分页大小显示。
+                    search: '搜索：',//右上角的搜索文本，可以写html标签
+                    paginate: {//分页的样式内容。
+                        previous: "上一页",
+                        next: "下一页",
+                        first: "第一页",
+                        last: "最后"
+                    },
+                    zeroRecords: "没有找到相关内容",//table tbody内容为空时，tbody的内容。
+                    //下面三者构成了总体的左下角的内容。
+                    info: "总共_PAGES_ 页，显示第_START_ 到第 _END_ ，筛选之后得到 _TOTAL_ 条，初始_MAX_ 条 ",//左下角的信息显示，大写的词为关键字。
+                    infoEmpty: "0条记录",//筛选为空时左下角的显示。
+                    infoFiltered: ""//筛选之后的左下角筛选提示，
+                },
+                showRowNumber: true,
+                bAutoWidth: false,
+            })
         });    
 
-        var tt = $('#tb_check').DataTable({
-            //data:dataset,
-            lengthMenu: [50, 100, "ALL"],//这里也可以设置分页，但是不能设置具体内容，只能是一维或二维数组的方式，所以推荐下面language里面的写法。
-            paging: false,//分页
-            ordering: false,//是否启用排序
-            //        order: [ [ 0, 'asc' ]],
-            //                searching: true,//搜索
-            dom: "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-            language: {
-                lengthMenu: '每页<select class="form-control input-xsmall">' + '<option value="15">15</option>' + '<option value="30">30</option>' + '<option value="50">50</option>' + '<option value="100">100</option>' + '</select>条记录',//左上角的分页大小显示。
-                search: '搜索：',//右上角的搜索文本，可以写html标签
-                paginate: {//分页的样式内容。
-                    previous: "上一页",
-                    next: "下一页",
-                    first: "第一页",
-                    last: "最后"
-                },
-                zeroRecords: "没有找到相关内容",//table tbody内容为空时，tbody的内容。
-                //下面三者构成了总体的左下角的内容。
-                info: "总共_PAGES_ 页，显示第_START_ 到第 _END_ ，筛选之后得到 _TOTAL_ 条，初始_MAX_ 条 ",//左下角的信息显示，大写的词为关键字。
-                infoEmpty: "0条记录",//筛选为空时左下角的显示。
-                infoFiltered: ""//筛选之后的左下角筛选提示，
-            },
-            showRowNumber: true,
-            bAutoWidth: false,
+
+        $(document).on('click', "#tb_check tbody td a[name='check']", function () {
+            //var data = $(this);
+            //console.log($(this));           
+            //e.stopPropagation();
+            //e.preventDefault();
+            var tr = $(this).parent().parent();
+            //console.log($(this).attr("rel"));
+            if (tr.attr("name") != "") {
+                var requestStr = CheckRuleService.checkRule(tr.attr("name"));
+                var requestData = JSON.parse(requestStr);
+
+                if (requestData.result == "0") {
+                    $("#myModal").find(".modal-body").html(requestData.message);
+                    return;
+                }
+                var result = requestData.data;
+
+                if (result.CheckResult.ErrorList.length > 0) {
+                    var html = template("CheckRuleResultTemp", { result: result.CheckResult });
+                    $("#myModal").find(".modal-body").html(html);
+                }
+            }
         });
-        
 
-        function getQueryString(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-            var r = window.location.search.substr(1).match(reg);
-            if (r != null) return unescape(r[2]); return null;
-        }
+        $(document).on("keypress", '.search-form[type="search"]', function (e) {
+            if (e.keyCode == "13") {
+                var keyword = $(this).val();
+                tt.search(keyword).draw();
+            }
+        });
 
+        $(document).on("click", ".btn-search", function (e) {
+            var keyword = $('.search-form[type="search"]').val();
+            if (keyword === '') {
+                $.toast("请输入查找内容", "info");
+                return false;
+            }
+            tt.search(keyword).draw();
+        });
     </script>
 </body>
 </html>

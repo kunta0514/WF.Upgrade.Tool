@@ -1,0 +1,15 @@
+﻿{
+  "SiteInfo": {
+    "CustomCode": "localhost",
+    "CustomName": "wh-zs",
+    "ERPUrl": "http://localhost:10001",
+    "WFUrl": "http://localhost:10001",
+    "ERPVersion": "307sp1",
+    "DBServerName": "10.5.10.51\\sql2008r2",
+    "DBName": "dotnet_erp254sp1_beijing_bjgr_branch1",
+    "DBUserName": "sa",
+    "DBSaPassword": "95938",
+    "UpFilesAddress": "E:\\workflow\\07 项目ERP\\04 重庆融汇",
+    "WFAddress": "E:\\workflow\\07 项目ERP\\04 重庆融汇"
+  }
+}

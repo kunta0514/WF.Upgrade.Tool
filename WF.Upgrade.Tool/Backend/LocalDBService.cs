@@ -16,9 +16,10 @@ namespace WF.Upgrade.Tool.Backend
             conn = new SQLiteConnection(SQLiteHelper.connectionString);//创建数据库实例，指定文件位置  
             conn.Open();//打开数据库，若文件不存在会自动创建  
             conn.Close();
-            if (!File.Exists(Environment.CurrentDirectory + @"\database\tool.db")){
-                Init_table();
-            }
+            //if (!File.Exists(Environment.CurrentDirectory + @"\database\tool.db")){
+            //    Init_table();
+            //}
+            Init_table();
             //
         }
 
@@ -36,7 +37,7 @@ CREATE TABLE 'p_check_rule' (
 'is_check'  INTEGER,
 'begin_time'  TEXT,
 'end_time'  TEXT,
-'err_code',INTEGER
+'err_code',INTEGER,
 'err_msg' TEXT
 'result_count'  INTEGER,
 'check_count'  INTEGER

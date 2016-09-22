@@ -26,19 +26,26 @@ namespace WF.Upgrade.Tool
         public MainWindow()
         {
             InitializeComponent();
-            init();
+            page_init();
+            local_init();
         }
 
-        private void init()
+        private void page_init()
         {            
             var Address = Environment.CurrentDirectory + @"\resource\html\check\index.html?Rand=" + DateTime.Now;
             //var Address = "http://10.5.106.25:1111/";
             //var Address = Environment.CurrentDirectory + @"\resource\html\site\index.html?Rand=" + DateTime.Now;
 
             cef.Address = Address;
-
             //cef.RegisterJsObject("callbackObj", new CallbackObjectForJs());
+            cef.MenuHandler = new MenuHandler();
             cef.RegisterJsObject("CheckRuleService", new CheckRuleService());
+
+            //cwb.Address = address;
+
+            //cwb.RegisterJsObject("SiteInfoData", new SiteService());
+            //cwb.
+
             //cef.PreviewTextInput += (o, e) =>
             //{
             //    foreach (var character in e.Text)
@@ -51,11 +58,16 @@ namespace WF.Upgrade.Tool
             //    e.Handled = true;
             //};
 
-            //cwb.Address = address;
 
-            //cwb.RegisterJsObject("SiteInfoData", new SiteService());
-            //cwb.
+        }
+
+        private void local_init()
+        {
+            //本地库初始化            
             LocalDBService.init();
+            //数据初始化
+            CheckRuleService crs = new CheckRuleService();
+            crs.InitCheckRule();
         }
 
         public class CallbackObjectForJs
@@ -64,6 +76,16 @@ namespace WF.Upgrade.Tool
             {
                 MessageBox.Show(msg);
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var Address = Environment.CurrentDirectory + @"\resource\html\site\index.html?Rand=" + DateTime.Now;
+            //var Address = "http://10.5.106.25:1111/";
+            //var Address = Environment.CurrentDirectory + @"\resource\html\site\index.html?Rand=" + DateTime.Now;
+
+            cef.Address = Address;
+            cef.RegisterJsObject("SiteService", new SiteService());
         }
     }
 }

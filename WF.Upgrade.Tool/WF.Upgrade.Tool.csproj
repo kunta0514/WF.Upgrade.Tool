@@ -115,6 +115,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.102.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.102.0\lib\net451\System.Data.SQLite.dll</HintPath>
@@ -163,6 +164,7 @@
     <Compile Include="Backend\UpDbService.cs" />
     <Compile Include="Backend\UpgradeActionService.cs" />
     <Compile Include="FormCheck\FormCheck.cs" />
+    <Compile Include="Handler\MenuHandler.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -186,21 +188,27 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="resource\assets\img\LOGO.png" />
-    <Resource Include="resource\assets\img\shezhi.png" />
-    <Content Include="resource\assets\css\datatables.css">
+    <Resource Include="resource\img\LOGO.png" />
+    <Resource Include="resource\img\shezhi.png" />
+    <Content Include="resource\css\datatables.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resource\assets\js\app.js">
+    <Content Include="resource\css\modal.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resource\assets\js\datatables.js">
+    <Content Include="resource\css\toast.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resource\assets\js\modal.js">
+    <Content Include="resource\js\app.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resource\assets\js\toast.js">
+    <Content Include="resource\js\datatables.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resource\js\modal.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resource\js\toast.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resource\html\check\index.html">
@@ -216,6 +224,10 @@
     <Content Include="database\db.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Config\HtmlContentConfig.config" />
+    <None Include="Config\HtmlRulesConfig.config" />
+    <None Include="Config\site.json" />
+    <None Include="Config\SiteInfo.config" />
     <None Include="结构说明.md" />
     <None Include="resource\Scripts\jquery-3.1.0.slim.min.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -273,10 +285,10 @@
     <Content Include="resource\html\site\index.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resource\assets\css\style.css">
+    <Content Include="resource\css\style.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resource\assets\js\template.js">
+    <Content Include="resource\js\template.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resource\Scripts\bootstrap.js">
@@ -319,6 +331,10 @@
     </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WF.CheckRule.Business\WF.CheckRule.Business.csproj">
+      <Project>{6592e203-62b5-4edb-bcae-7d1de7e264d4}</Project>
+      <Name>WF.CheckRule.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WF.DbProvider\WF.DbProvider.csproj">
       <Project>{17876af6-0d2c-44c7-82ee-2520c3cf4bf0}</Project>
       <Name>WF.DbProvider</Name>
@@ -331,17 +347,8 @@
       <Project>{2ac2407a-f3fc-4c6e-94db-0ea5ed5eea42}</Project>
       <Name>WF.Upgrade.Public</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WF.Upgrade.Web\WF.Upgrade.Web.csproj">
-      <Project>{98b1db1d-d08e-4a8e-aec0-284c29fd07c1}</Project>
-      <Name>WF.Upgrade.Web</Name>
-    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Config\" />
-    <Folder Include="resource\vendor\" />
-    <Folder Include="View\" />
-    <Folder Include="VModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>

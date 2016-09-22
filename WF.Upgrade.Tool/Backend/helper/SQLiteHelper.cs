@@ -211,6 +211,10 @@ namespace WF.Upgrade.Tool.Backend
                 throw;
             }
         }
+        public static SQLiteDataReader ExecuteReader(string commandText)
+        {
+            return ExecuteReader(connectionString, CommandType.Text, commandText, (SQLiteParameter[])null);
+        }
         public static SQLiteDataReader ExecuteReader(CommandType commandType, string commandText)
         {
             return ExecuteReader(connectionString, commandType, commandText, (SQLiteParameter[])null);
@@ -260,7 +264,7 @@ namespace WF.Upgrade.Tool.Backend
             catch
             {
 
-                return 0; ;
+                return -1;
             }
             finally
             {
@@ -272,7 +276,7 @@ namespace WF.Upgrade.Tool.Backend
         {
             SQLiteCommand cmd = new SQLiteCommand();
             PrepareCommand(cmd, connection, (SQLiteTransaction)null, commandType, commandText, commandParameters);
-            int retval = (int)cmd.ExecuteScalar();
+            int retval = Convert.ToInt32(cmd.ExecuteScalar());
             cmd.Parameters.Clear();
             return retval;
         }
