@@ -31,10 +31,10 @@
                 </Button.Background>
             </Button>
             <DockPanel  Canvas.Right="62" Canvas.Top="46" Width="320">
-                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White">首页</Button>
-                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White">数据库检测</Button>
-                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White">分类检测</Button>
-                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White">升级</Button>
+                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White" Name="main_index" Click="main_index_Click">首页</Button>
+                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White" Name="main_db" Click="main_db_Click">数据库检测</Button>
+                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White" Name="main_fl" Click="main_fl_Click">分类检测</Button>
+                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White" Name="main_up" Click="main_up_Click">升级</Button>
             </DockPanel>
         </Canvas>
         <Grid Grid.Row="1" Grid.ColumnSpan="1" Height="2" >
@@ -46,10 +46,17 @@
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
-        <Grid Grid.Row="2" Grid.ColumnSpan="1" Height="30" >
-            <Label Height="30" >二级菜单按钮</Label>
+        <Grid Grid.Row="2" Grid.ColumnSpan="1" Height="30" ShowGridLines="True">
+            <DockPanel Margin="0,0,538,0">
+                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White" Name="before_up" Click="before_up_Click">升级前-检测</Button>
+                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White" Name="after_up" Click="after_up_Click">升级后-检测</Button>
+                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White" Name="form_check" Click="form_check_Click">表单检测</Button>
+                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White" Name="file_check" Click="file_check_Click">文件检测</Button>
+                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White" Name="iis_check" Click="iis_check_Click">IIS站点检测</Button>
+                <Button Width="70" Height="23" HorizontalAlignment="Center" Margin="5,0" Background="White" BorderBrush="White" Name="other_check" Click="other_check_Click">其他检测</Button>
+            </DockPanel>            
         </Grid>
-        <Grid Grid.Row="3" Grid.ColumnSpan="1" Margin="0,20,0,0">
+        <Grid Grid.Row="3" Grid.ColumnSpan="1" Margin="0,20,0,0" ShowGridLines="True">
             <cefSharp:ChromiumWebBrowser x:Name="cef"  Opacity="{Binding ElementName=opacitySlider, Path=Value}"
                                   Address="{Binding Address, Mode=TwoWay}"
                                   Title="{Binding Title, Mode=OneWayToSource}"

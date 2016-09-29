@@ -31,14 +31,10 @@ namespace WF.Upgrade.Tool
         }
 
         private void page_init()
-        {            
-            var Address = Environment.CurrentDirectory + @"\resource\html\check\index.html?Rand=" + DateTime.Now;
-            //var Address = "http://10.5.106.25:1111/";
-            //var Address = Environment.CurrentDirectory + @"\resource\html\site\index.html?Rand=" + DateTime.Now;
-
-            cef.Address = Address;
+        {
             //cef.RegisterJsObject("callbackObj", new CallbackObjectForJs());
             cef.MenuHandler = new MenuHandler();
+            //TODO:前端注册的JS对象统一，然后再分发到其他的Service。
             cef.RegisterJsObject("CheckRuleService", new CheckRuleService());
 
             //cwb.Address = address;
@@ -85,7 +81,61 @@ namespace WF.Upgrade.Tool
             //var Address = Environment.CurrentDirectory + @"\resource\html\site\index.html?Rand=" + DateTime.Now;
 
             cef.Address = Address;
-            cef.RegisterJsObject("SiteService", new SiteService());
+            //cef.RegisterJsObject("SiteService", new SiteService());
+        }
+
+        private void before_up_Click(object sender, RoutedEventArgs e)
+        {
+            var Address = Environment.CurrentDirectory + @"\resource\html\check\index.html?Rand=" + DateTime.Now;
+            //var Address = "http://10.5.106.25:1111/";
+            //var Address = Environment.CurrentDirectory + @"\resource\html\site\index.html?Rand=" + DateTime.Now;
+
+            cef.Address = Address;
+        }
+
+        private void after_up_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void form_check_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void file_check_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void iis_check_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void other_check_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void main_index_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void main_db_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void main_fl_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void main_up_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

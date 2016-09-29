@@ -156,6 +156,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Backend\CheckRuleService.cs" />
+    <Compile Include="Backend\UIScriptService.cs" />
     <Compile Include="Backend\FormMainData.cs" />
     <Compile Include="Backend\helper\JsonHelp.cs" />
     <Compile Include="Backend\helper\SQLiteHelper.cs" />

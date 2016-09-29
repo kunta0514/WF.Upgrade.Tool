@@ -16,10 +16,10 @@ namespace WF.Upgrade.Tool.Backend
 {
     public class CheckRuleService
     {
-        //public CheckRuleService()
-        //{
-        //    new ConnectionScope(InitDb.ConnectionStr());
-        //}
+        public CheckRuleService()
+        {
+            //new ConnectionScope(InitDb.ConnectionStr());
+        }
 
         private List<RuleInfo> RuleInfoList { get; set; }
 
