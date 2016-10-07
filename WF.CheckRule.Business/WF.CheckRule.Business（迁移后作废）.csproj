@@ -1,17 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2AC2407A-F3FC-4C6E-94DB-0EA5ED5EEA42}</ProjectGuid>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6592E203-62B5-4EDB-BCAE-7D1DE7E264D4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WF.Upgrade.Public</RootNamespace>
-    <AssemblyName>WF.Upgrade.Public</AssemblyName>
+    <RootNamespace>WF.CheckRule.Business</RootNamespace>
+    <AssemblyName>WF.CheckRule.Business</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Nonshipping>true</Nonshipping>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -42,29 +43,46 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppConfig.cs" />
-    <Compile Include="DbUpInfo\DbUpInfo.cs" />
-    <Compile Include="InitDb\InitDb.cs" />
+    <Compile Include="AuditorDefine\Auditor.cs" />
+    <Compile Include="BusinessObject\BusinessObject.cs" />
+    <Compile Include="BusinessObject\Module_Application.cs" />
+    <Compile Include="BusinessObject\Module_BusinessObject.cs" />
+    <Compile Include="Command\BTDomainXML.cs" />
+    <Compile Include="ProcessEntity\ProcessEntity.cs" />
+    <Compile Include="ProcessEntity\ProcessStepPathEntity.cs" />
+    <Compile Include="ProcessModule\ProcessModuleForm.cs" />
+    <Compile Include="ProcessModule\ProcessModuleStep.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Site\Site.cs" />
-    <Compile Include="Utility\Utility.cs" />
-    <Compile Include="Xml\XmlHelper.cs" />
+    <Compile Include="Form\Form.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WF.Upgrade.Model\WF.Upgrade.Model.csproj">
+    <Folder Include="Params\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WF.DbProvider\WF.DbProvider（迁移后作废）.csproj">
+      <Project>{17876af6-0d2c-44c7-82ee-2520c3cf4bf0}</Project>
+      <Name>WF.DbProvider（迁移后作废）</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WF.Upgrade.Model\WF.Upgrade.Model（迁移后作废）.csproj">
       <Project>{0f213748-b365-4293-8096-e0033b573392}</Project>
-      <Name>WF.Upgrade.Model</Name>
+      <Name>WF.Upgrade.Model（迁移后作废）</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WF.Upgrade.Public\WF.Upgrade.Public（迁移后作废）.csproj">
+      <Project>{2ac2407a-f3fc-4c6e-94db-0ea5ed5eea42}</Project>
+      <Name>WF.Upgrade.Public（迁移后作废）</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="检查说明.md" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

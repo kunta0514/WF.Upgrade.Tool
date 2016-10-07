@@ -358,21 +358,21 @@
     </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WF.CheckRule.Business\WF.CheckRule.Business.csproj">
+    <ProjectReference Include="..\WF.CheckRule.Business\WF.CheckRule.Business（迁移后作废）.csproj">
       <Project>{6592e203-62b5-4edb-bcae-7d1de7e264d4}</Project>
-      <Name>WF.CheckRule.Business</Name>
+      <Name>WF.CheckRule.Business（迁移后作废）</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WF.DbProvider\WF.DbProvider.csproj">
+    <ProjectReference Include="..\WF.DbProvider\WF.DbProvider（迁移后作废）.csproj">
       <Project>{17876af6-0d2c-44c7-82ee-2520c3cf4bf0}</Project>
-      <Name>WF.DbProvider</Name>
+      <Name>WF.DbProvider（迁移后作废）</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WF.Upgrade.Model\WF.Upgrade.Model.csproj">
+    <ProjectReference Include="..\WF.Upgrade.Model\WF.Upgrade.Model（迁移后作废）.csproj">
       <Project>{0f213748-b365-4293-8096-e0033b573392}</Project>
-      <Name>WF.Upgrade.Model</Name>
+      <Name>WF.Upgrade.Model（迁移后作废）</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WF.Upgrade.Public\WF.Upgrade.Public.csproj">
+    <ProjectReference Include="..\WF.Upgrade.Public\WF.Upgrade.Public（迁移后作废）.csproj">
       <Project>{2ac2407a-f3fc-4c6e-94db-0ea5ed5eea42}</Project>
-      <Name>WF.Upgrade.Public</Name>
+      <Name>WF.Upgrade.Public（迁移后作废）</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -56,9 +56,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WF.Upgrade.Public\WF.Upgrade.Public.csproj">
+    <ProjectReference Include="..\WF.Upgrade.Public\WF.Upgrade.Public（迁移后作废）.csproj">
       <Project>{2ac2407a-f3fc-4c6e-94db-0ea5ed5eea42}</Project>
-      <Name>WF.Upgrade.Public</Name>
+      <Name>WF.Upgrade.Public（迁移后作废）</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

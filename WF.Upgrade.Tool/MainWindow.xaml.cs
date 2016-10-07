@@ -34,7 +34,8 @@ namespace WF.Upgrade.Tool
         {
             //cef.RegisterJsObject("callbackObj", new CallbackObjectForJs());
             cef.MenuHandler = new MenuHandler();
-            //TODO:前端注册的JS对象统一，然后再分发到其他的Service。
+            //TODO:前端注册的JS对象统一，然后再分发到其他的Service。也可以改为new不同的cef，然后注册对应的Service。 
+            //           
             cef.RegisterJsObject("CheckRuleService", new CheckRuleService());
 
             //cwb.Address = address;
@@ -86,6 +87,7 @@ namespace WF.Upgrade.Tool
 
         private void before_up_Click(object sender, RoutedEventArgs e)
         {
+            
             var Address = Environment.CurrentDirectory + @"\resource\html\check\index.html?Rand=" + DateTime.Now;
             //var Address = "http://10.5.106.25:1111/";
             //var Address = Environment.CurrentDirectory + @"\resource\html\site\index.html?Rand=" + DateTime.Now;
