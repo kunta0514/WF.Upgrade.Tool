@@ -61,20 +61,33 @@ namespace WF.Upgrade.Business
             //    rtnlist.Add(new CheckResult { Name = item.AuditorName, Guid = new Guid(item.AuditorScope), TableName = "myWorkflowAuditorDefine", ExInfo = "发现有非标准的责任人定义，请与一线确认是否需要保留", ErrorCode = "10901" });
             //}
             DataTable dt = CPQuery.From(sql).FillDataTable();
-            var errorList = dt.AsEnumerable().Select(row => "非标准的责任人定义：" + row["AuditorName"]).ToList();
-            var repairParamList = dt.AsEnumerable().
-                                Select(row => new Dictionary<string, string>
-                                            {
-                                                {"TableName", "myWorkflowAuditorDefine"},
-                                                {"AuditorName", row["AuditorName"].ToString()},
-                                                {"AuditorScope", row["AuditorScope"].ToString()}
-                                            }).ToList();
+            //var errorList = dt.AsEnumerable().Select(row => "非标准的责任人定义：" + row["AuditorName"]).ToList();
+            //var repairParamList = dt.AsEnumerable().
+            //                    Select(row => new Dictionary<string, string>
+            //                                {
+            //                                    {"TableName", "myWorkflowAuditorDefine"},
+            //                                    {"AuditorName", row["AuditorName"].ToString()},
+            //                                    {"AuditorScope", row["AuditorScope"].ToString()}
+            //                                }).ToList();
+
+            var errorList = dt.AsEnumerable().Select(row => new Dictionary<string, string> {
+                {"rule_name", "非标准产品的责任人解析规则"},
+                {"table", "myWorkflowAuditorDefine"},
+                {"pk", "AuditorScope"},
+                {"pk_value", row["AuditorScope"].ToString()},
+                {"ex_msg", "非标准的责任人定义：" + row["AuditorName"]},
+                {"repair_param", null},
+                {"extend", null}
+            }).ToList();
+
 
             return new CheckResult
             {
-                ErrorList = errorList,
-                RepairParamList = repairParamList,
-                ErrorCode = "10901"
+                name = "非标准产品的责任人解析规则",
+                err_code = "10901",
+                err_msg = "存在非标准的责任人定义",
+                check_count = dt.Rows.Count,
+                ex_list = errorList,
             };
         }
     }
@@ -108,21 +121,38 @@ namespace WF.Upgrade.Business
                 WHERE d.auditorScope IS NULL");
 
             DataTable dt = CPQuery.From(sql).FillDataTable();
-            var errorList = dt.AsEnumerable().Select(row => "模板中使用了未定义的责任人：" + row["ProcessName"]).ToList();
-            var repairParamList = dt.AsEnumerable().
-                                Select(row => new Dictionary<string, string>
-                                            {
-                                                {"TableName", "myWorkflowProcessModuleDefinition"},
-                                                {"ProcessName", row["ProcessName"].ToString()},
-                                                {"ProcessGUID", row["ProcessGUID"].ToString()}
-                                            }).ToList();
+            //var errorList = dt.AsEnumerable().Select(row => "模板中使用了未定义的责任人：" + row["ProcessName"]).ToList();
+            //var repairParamList = dt.AsEnumerable().
+            //                    Select(row => new Dictionary<string, string>
+            //                                {
+            //                                    {"TableName", "myWorkflowProcessModuleDefinition"},
+            //                                    {"ProcessName", row["ProcessName"].ToString()},
+            //                                    {"ProcessGUID", row["ProcessGUID"].ToString()}
+            //                                }).ToList();
+            var errorList = dt.AsEnumerable().Select(row => new Dictionary<string, string> {
+                {"rule_name", "模板中使用了未定义的责任人"},
+                {"table", "myWorkflowProcessModuleDefinition"},
+                {"pk", "ProcessGUID"},
+                {"pk_value", row["ProcessGUID"].ToString()},
+                {"ex_msg", "模板中使用了未定义的责任人：" + row["ProcessName"]},
+                {"extend", null}
+            }).ToList();
 
             return new CheckResult
             {
-                ErrorList = errorList,
-                RepairParamList = repairParamList,
-                ErrorCode = "10901"
+                name = "模板中使用了未定义的责任人",
+                err_code = "10902",
+                err_msg = "存在模板中使用了未定义的责任人",
+                check_count = dt.Rows.Count,
+                ex_list = errorList,
             };
+
+            //return new CheckResult
+            //{
+            //    ErrorList = errorList,
+            //    RepairParamList = repairParamList,
+            //    ErrorCode = "10901"
+            //};
         }
     }
 }

@@ -56,23 +56,33 @@ CodeUp 程序升级
     "err_code": "10010",
     "err_msg": "存在非标准的责任人定义",
     "check_count": "50",
+    "extend":{param:""},
     "ex_list": [
     {
-      "rule_name":"非标准产品的责任人解析规则"
+      "rule_name":"非标准产品的责任人解析规则",
+      "table":"myWorkflowAuditorDefine",
+      "pk":"AuditorScope",
+      "pk_value":"2AC1EAFB-E169-4272-A9AB-0385F293560C",
       "ex_msg": "非标准的责任人定义:[上级部门主管]",
-      "repair_param": {TableName:"",AuditorScope:"",AuditorName:""},
+      "repair_param": {AuditorScope:"",AuditorName:""},//这个格式可以改，直接用key-value写，毕竟匿名json
       "extend": "继续扩展打开的地址，C#中的魔法方法怎么写？方法名是变量，直接指向方法"
     },
     {
-      "rule_name":"非标准产品的责任人解析规则"
+      "rule_name":"非标准产品的责任人解析规则",
+      "table":"myWorkflowAuditorDefine",
+      "pk":"AuditorScope",
+      "pk_value":"9AFED0E0-E4CE-4544-A621-0529424723D2",
       "ex_msg": "非标准的责任人定义:[上级部门主管]",
-      "repair_param": {TableName:"",AuditorScope:"",AuditorName:""},
+      "repair_param": {AuditorScope:"",AuditorName:""},
       "extend": "继续扩展打开的地址，C#中的魔法方法怎么写？方法名是变量，直接指向方法"
     },
     {
-      "rule_name":"非标准产品的责任人解析规则"
+      "rule_name":"非标准产品的责任人解析规则",
+      "table":"myWorkflowAuditorDefine",
+      "pk":"AuditorScope",
+      "pk_value":"DFC86A11-D935-4C0C-9D0E-06B3377D2DF9",
       "ex_msg": "非标准的责任人定义:[上级部门主管]",
-      "repair_param": {TableName:"",AuditorScope:"",AuditorName:""},
+      "repair_param": {AuditorScope:"",AuditorName:""},
       "extend": "继续扩展打开的地址，C#中的魔法方法怎么写？方法名是变量，直接指向方法"
     }
     ]

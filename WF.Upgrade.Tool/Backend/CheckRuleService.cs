@@ -46,7 +46,7 @@ namespace WF.Upgrade.Tool.Backend
             {
                 if (RuleInfoList == null)
                 {
-                    var assembyle = Assembly.Load("WF.CheckRule.Business");
+                    var assembyle = Assembly.Load("WF.Upgrade.Business");
                     var typeList = assembyle.GetTypes();
                     var ruleInfoList = new List<RuleInfo>();
 

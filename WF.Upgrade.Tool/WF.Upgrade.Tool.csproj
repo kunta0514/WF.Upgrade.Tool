@@ -365,6 +365,10 @@
       <Project>{17876af6-0d2c-44c7-82ee-2520c3cf4bf0}</Project>
       <Name>WF.DbProvider（迁移后作废）</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WF.Upgrade.Business\WF.Upgrade.Business.csproj">
+      <Project>{32d68777-03ab-4d69-acd6-ba614f986679}</Project>
+      <Name>WF.Upgrade.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WF.Upgrade.Model\WF.Upgrade.Model（迁移后作废）.csproj">
       <Project>{0f213748-b365-4293-8096-e0033b573392}</Project>
       <Name>WF.Upgrade.Model（迁移后作废）</Name>

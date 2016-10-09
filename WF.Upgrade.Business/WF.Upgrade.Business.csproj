@@ -48,10 +48,10 @@
     <Compile Include="CheckRule\BusinessObject\BusinessObject.cs" />
     <Compile Include="CheckRule\BusinessObject\Module_Application.cs" />
     <Compile Include="CheckRule\BusinessObject\Module_BusinessObject.cs" />
-    <Compile Include="CheckRule\Model\CheckResult.cs" />
     <Compile Include="CheckRule\Command\BTDomainXML.cs" />
     <Compile Include="CheckRule\Form\Form.cs" />
     <Compile Include="CheckRule\ICheckRule.cs" />
+    <Compile Include="CheckRule\Model\CheckResult.cs" />
     <Compile Include="CheckRule\ProcessEntity\ProcessEntity.cs" />
     <Compile Include="CheckRule\ProcessEntity\ProcessStepPathEntity.cs" />
     <Compile Include="CheckRule\ProcessModule\ProcessModuleForm.cs" />

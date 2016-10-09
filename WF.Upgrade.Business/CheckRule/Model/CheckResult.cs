@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WF.Upgrade.Business
 {
     public class CheckResult
     {
+        public string name { set; get; }
 
-        public string CheckRuleName { set; get; }
+        public string err_code { get; set; }
 
-        public object RepairParamList { get; set; }
+        public string err_msg { get; set; }
 
-        public string ErrorTitle { get; set; }
+        public int check_count { get; set; }
 
-        public string ErrorCode { get; set; }
+        public string extend { get; set; }
 
-        public List<string> ErrorList { get; set; }
-
-        public string ExceptionMessage { get; set; }
+        public object ex_list { get; set; }
+        
     }
 }
