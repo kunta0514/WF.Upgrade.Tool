@@ -35,7 +35,7 @@ namespace WF.Upgrade.Business
         //    rtnlist = (from Interface.Extensions.listInfo info in obj.Lists select new Result { Guid = new Guid(info.GUID),Name = info.Name,TableName= "myWorkflowProcessModuleDefinition",ExInfo = info.Info }).ToList();
         //    return rtnlist;
         //}
-        public CheckResult Check(object input)
+        public CheckRule Check(object input)
         {
             throw new NotImplementedException();
         }

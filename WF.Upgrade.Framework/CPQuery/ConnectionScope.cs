@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WF.Upgrade.Framework
+namespace WF.Upgrade.Framework.CPQuery
 {
     /// <summary>
     /// 连接范围
@@ -8,6 +8,18 @@ namespace WF.Upgrade.Framework
     public sealed class ConnectionScope:IDisposable
     {
         private static string s_connectionString;
+
+        internal static void SetDefaultConnection(string connectionString)
+        {
+            if (string.IsNullOrEmpty(connectionString))
+                throw new ArgumentNullException("connectionString");
+
+            s_connectionString = connectionString;
+        }
+        internal static string GetDefaultConnectionString()
+        {
+            return s_connectionString;
+        }
 
         [ThreadStatic]
         private static ConnectionManager _connectionManager;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using WF.Upgrade.Framework;
+using WF.Upgrade.Framework.CPQuery;
 
 namespace WF.Upgrade.Business
 {
@@ -16,7 +17,7 @@ namespace WF.Upgrade.Business
 
     public class Auditor: ICheckRule
     {
-        public CheckResult Check(object input)
+        public CheckRule Check(object input)
         {
             return CheckAuditorDefine();
         }
@@ -27,8 +28,7 @@ namespace WF.Upgrade.Business
             return null;
         }
 
-
-        private CheckResult CheckAuditorDefine()
+        private CheckRule CheckAuditorDefine()
         {
             string sql = @"select * from myWorkflowAuditorDefine where auditorName not in (
                         '[发起人]',
@@ -81,7 +81,7 @@ namespace WF.Upgrade.Business
             }).ToList();
 
 
-            return new CheckResult
+            return new CheckRule
             {
                 name = "非标准产品的责任人解析规则",
                 err_code = "10901",
@@ -101,7 +101,7 @@ namespace WF.Upgrade.Business
 
     public class AuditorScropNotExits : ICheckRule
     {
-        public CheckResult Check(object input)
+        public CheckRule Check(object input)
         {
             return CheckAuditorDefine();
         }
@@ -113,7 +113,7 @@ namespace WF.Upgrade.Business
         }
 
 
-        private CheckResult CheckAuditorDefine()
+        private CheckRule CheckAuditorDefine()
         {
             string sql = string.Format(@"SELECT a.ProcessGUID,a.ProcessName,b.StepName,c.AuditorName FROM dbo.myWorkflowProcessModule a  JOIN dbo.myWorkflowStepModuleDefinition b ON a.ProcessGUID=b.StepDefinitionGUID 
                 JOIN dbo.myWorkflowBandModuleDefinition c  ON b.StepDefinitionGUID=c.BandDefinitionGUID
@@ -138,7 +138,7 @@ namespace WF.Upgrade.Business
                 {"extend", null}
             }).ToList();
 
-            return new CheckResult
+            return new CheckRule
             {
                 name = "模板中使用了未定义的责任人",
                 err_code = "10902",

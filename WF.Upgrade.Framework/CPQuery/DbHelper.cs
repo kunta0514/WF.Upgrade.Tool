@@ -6,7 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
 
-namespace WF.Upgrade.Framework
+namespace WF.Upgrade.Framework.CPQuery
 {
     internal static class DbHelper
     {

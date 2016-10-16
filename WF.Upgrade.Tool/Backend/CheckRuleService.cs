@@ -5,10 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Newtonsoft.Json;
-using WF.DbProvider;
-using WF.Upgrade.Model;
-using WF.Upgrade.Model.CustomAttribute;
-using WF.Upgrade.Public;
+using WF.Upgrade.Tool.Model;
+using WF.Upgrade.Business;
 using System.Windows;
 using System.Data;
 
@@ -21,11 +19,11 @@ namespace WF.Upgrade.Tool.Backend
             //new ConnectionScope(InitDb.ConnectionStr());
         }
 
-        private List<RuleInfo> RuleInfoList { get; set; }
+        private static List<Business.CheckRule> checkRuleList { get; set; }
 
-        private Dictionary<string, Type> CheckRuleTypeList = new Dictionary<string, Type>(); 
+        private static Dictionary<string, Type> checkRuleTypeList = new Dictionary<string, Type>(); 
 
-        private Dictionary<string,int>  SelectedRuleKind = new Dictionary<string, int>();
+        private Dictionary<string,int>  selectedRuleKind = new Dictionary<string, int>();
 
         //public void showMessage(string msg)
         //{
@@ -44,17 +42,17 @@ namespace WF.Upgrade.Tool.Backend
         {
             try
             {
-                if (RuleInfoList == null)
+                if (checkRuleList == null)
                 {
                     var assembyle = Assembly.Load("WF.Upgrade.Business");
                     var typeList = assembyle.GetTypes();
-                    var ruleInfoList = new List<RuleInfo>();
+                    var ruleInfoList = new List<Business.CheckRule>();
 
                     foreach (Type typeRule in typeList.Where(typeRule => typeof (ICheckRule).IsAssignableFrom(typeRule))  )
                     {
 
                         var attrlist = typeRule.GetCustomAttributes(true);
-                        var info = new RuleInfo();
+                        var info = new Business.CheckRule();
                         foreach (var att in attrlist)
                         {
                             var attType = att.GetType();
@@ -68,37 +66,37 @@ namespace WF.Upgrade.Tool.Backend
                                     info.FromVersion = ((ToVersionAttribute) att).ToVersion;
                                     break;
                                 case "CheckRuleTypeAttribute":
-                                    info.CheckRuleType = ((CheckRuleTypeAttribute) att).CheckRuleType;
+                                    info.type = ((CheckRuleTypeAttribute) att).CheckRuleType;
                                     break;
                                 case "CheckRuleRemarkAttribute":
-                                    info.CheckRuleRemark = ((CheckRuleRemarkAttribute) att).CheckRuleRemark;
+                                    info.remark = ((CheckRuleRemarkAttribute) att).CheckRuleRemark;
                                     break;
                                 case "CheckRuleKindAttribute":
-                                    info.CheckRuleKind = ((CheckRuleKindAttribute) att).CheckRuleKind;
+                                    info.kind = ((CheckRuleKindAttribute) att).CheckRuleKind;
                                     break;
                                 case "CheckRuleNameAttribute":
-                                    info.CheckRuleName = ((CheckRuleNameAttribute) att).CheckRuleName;
+                                    info.name = ((CheckRuleNameAttribute) att).CheckRuleName;
                                     break;
                             }
                         }
-                        if (string.IsNullOrEmpty(info.CheckRuleName))
+                        if (string.IsNullOrEmpty(info.name))
                         {
                             continue;
                         }
-                        info.IsCheck = false;
+                        info.is_check = 0;
                         ruleInfoList.Add(info);
-                        CheckRuleTypeList.Add(info.CheckRuleName, typeRule);
+                        checkRuleTypeList.Add(info.name, typeRule);
                                            
                     }
-                    RuleInfoList = ruleInfoList;
-                    sync_check_rule(RuleInfoList);
+                    checkRuleList = ruleInfoList;
+                    sync_check_rule(checkRuleList);
                 }              
                 var result = new
                              {
                                  result = 1,
                                  message = string.Empty,
-                                 data = RuleInfoList,
-                                 checkRuleKindList = RuleInfoList.Select(info => info.CheckRuleKind).Distinct().ToList()
+                                 data = checkRuleList,
+                                 checkRuleKindList = checkRuleList.Select(info => info.kind).Distinct().ToList()
                              };
                 
                 //return JsonConvert.SerializeObject(result);
@@ -117,10 +115,10 @@ namespace WF.Upgrade.Tool.Backend
         public string GetRuleInfoListSearch(string input)
         {
             var dic = JsonConvert.DeserializeObject<Dictionary<string, string>>(input);
-            List<RuleInfo> resultList = new List<RuleInfo>();
+            List<Business.CheckRule> resultList = new List<Business.CheckRule>();
             if (dic.ContainsKey("CheckRuleKind") && !string.IsNullOrEmpty(dic["CheckRuleKind"]))
             {
-                resultList = RuleInfoList.Where(info => info.CheckRuleKind == dic["CheckRuleKind"]).ToList();
+                resultList = checkRuleList.Where(info => info.kind == dic["CheckRuleKind"]).ToList();
             }
 
             return JsonConvert.SerializeObject(resultList);
@@ -132,31 +130,26 @@ namespace WF.Upgrade.Tool.Backend
             try
             {
                 var ruleInfo = Check(ruleName);
-                return JsonConvert.SerializeObject(new
-                                                   {
-                                                       result = 1,
-                                                       data = ruleInfo
-                                                   });
+                //TODO::需要按照新格式返回
+                return JsonConvert.SerializeObject(ruleInfo);
             }
             catch (Exception ex)
             {
-                return JsonConvert.SerializeObject(new
-                                                   {
-                                                       result = 0,
-                                                       message = ex.Message
-                                                   });
+                return JsonConvert.SerializeObject(new { err_code = -1, message = ex.Message });
             }
         }
 
-        private RuleInfo Check(string ruleName)
+        private CheckRule Check(string ruleName)
         {
-            var type = CheckRuleTypeList.Where(kv => kv.Key == ruleName).First().Value;
+            //TODO::此处改造成本地库读取方式
+            var type = checkRuleTypeList.Where(kv => kv.Key == ruleName).First().Value;
+            var checkRuleInfo = checkRuleList.Find(t => t.name == ruleName);
 
-            var ruleInfo = RuleInfoList.Find(t => t.CheckRuleName == ruleName);
-            ruleInfo.CheckBegin = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            //TODO::此处统一了各地方CheckRule的model，可以直接用反射后的返回值复制。
+            checkRuleInfo.begin_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             if (type != null)
             {
-                CheckResult result;
+                CheckRule result;
                 try
                 {
                     var rule = Activator.CreateInstance(type) as ICheckRule;
@@ -164,37 +157,38 @@ namespace WF.Upgrade.Tool.Backend
                 }
                 catch (Exception ex)
                 {
-                    result = new CheckResult
-                             {
-                                 ErrorTitle = "运行规则失败！",
-                                 ErrorList = new List<string> {ex.Message}
-                             };
+                    //return null;
+                    result = new CheckRule
+                    {
+                        err_msg = "运行规则失败！",
+                        err_code = "-1"
+                    };
                 }
                 //结果记录
-
-                ruleInfo.IsCheck = true;
-                ruleInfo.CheckResult = result;
+                checkRuleInfo.is_check = 1;
+                checkRuleInfo.ex_list = result.ex_list;
             }
-            ruleInfo.CheckEnd = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            sync_check_rule(ruleInfo);
-            return ruleInfo;
+            checkRuleInfo.end_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            sync_check_rule(checkRuleInfo);
+            return checkRuleInfo;
         }
 
-        private void sync_check_rule(RuleInfo ruleinfo)
+        private void sync_check_rule(CheckRule rule)
         {
-            string sql = string.Format(@"update p_check_rule set begin_time={0},end_time={1},result_count={2},is_check={3},check_count={4},err_code={5},err_msg={6} where name={7}", 
-                ruleinfo.CheckRuleName);
+            //ruleinfo.CheckResult.ex_list;
+            string sql = string.Format(@"update p_check_rule set begin_time={1},end_time={2},result_count={3},is_check={4},check_count={5},err_code={6},err_msg={7} where name={0}",
+                rule.name, rule.begin_time, rule.end_time, 55, 1, rule.check_count, rule.err_code, rule.err_msg);
         }
 
-        private void sync_check_rule(List<RuleInfo> ruleInfoList)
+        private void sync_check_rule(List<Business.CheckRule> ruleInfoList)
         {
             foreach (var item in ruleInfoList)
             {
                 //检查规则是否已经存在
-                string sql = string.Format(@"select 1 from p_check_rule where name = '{0}'", item.CheckRuleName);
+                string sql = string.Format(@"select 1 from p_check_rule where name = '{0}'", item.name);
                 if (SQLiteHelper.ExecuteScalar(System.Data.CommandType.Text, sql) != 1)
                 {
-                    sql = string.Format(@"insert into p_check_rule(name,kind,type,remark) values ('{0}','{1}','{2}','{3}')", item.CheckRuleName, item.CheckRuleKind, item.CheckRuleType, item.CheckRuleRemark);
+                    sql = string.Format(@"insert into p_check_rule(name,kind,type,remark) values ('{0}','{1}','{2}','{3}')", item.name, item.kind, item.type, item.remark);
                     SQLiteHelper.ExecuteNonQuery(System.Data.CommandType.Text, sql);
                 }
             }
@@ -202,7 +196,7 @@ namespace WF.Upgrade.Tool.Backend
         
         public string ViewRule(string ruleName)
         {
-            var info = RuleInfoList.Find(r => r.CheckRuleName == ruleName);
+            var info = checkRuleList.Find(r => r.name == ruleName);
 
             return JsonConvert.SerializeObject(info);
         }

@@ -7,7 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections;
 
-namespace WF.Upgrade.Framework
+namespace WF.Upgrade.Framework.CPQuery
 {
     public sealed class CPQuery : IDbExecute
     {

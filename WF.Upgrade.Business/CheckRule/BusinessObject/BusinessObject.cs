@@ -6,7 +6,7 @@ using System.Data;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
-using WF.Upgrade.Framework;
+using WF.Upgrade.Framework.CPQuery;
 
 namespace WF.Upgrade.Business
 {
@@ -18,7 +18,7 @@ namespace WF.Upgrade.Business
     [CheckRuleName("流程模版中DomainXML存在异常")]
     public class BusinessObject : ICheckRule
     {
-        public CheckResult Check(object input)
+        public CheckRule Check(object input)
         {
             //Result rs = new Result();
             //List<Result> rtnlist = new List<Result>();
@@ -95,13 +95,14 @@ namespace WF.Upgrade.Business
 
                     }
                 }
+                return null;
 
-                return new CheckResult
-                       {
-                           ErrorList = errorList,
-                           RepairParamList = repairParamList,
-                           ErrorCode = "10103"
-                       };
+                //return new CheckResult
+                //       {
+                //           ErrorList = errorList,
+                //           RepairParamList = repairParamList,
+                //           ErrorCode = "10103"
+                //       };
             }
             catch (Exception ex)
             {

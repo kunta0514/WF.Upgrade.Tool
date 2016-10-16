@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WF.Upgrade.Framework
+namespace WF.Upgrade.Framework.CPQuery
 {
     /// <summary>
     /// 表示忽略指定的数据列。

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
-using WF.Upgrade.Framework;
+using WF.Upgrade.Framework.CPQuery;
 
 namespace WF.Upgrade.Business
 {
@@ -15,7 +15,7 @@ namespace WF.Upgrade.Business
     [CheckRuleName("已启用的流程模版中没有业务对象")]
     public class Module_BusinessObject : ICheckRule
     {
-        public CheckResult Check(object input)
+        public CheckRule Check(object input)
         {
             string sql = @"select * from myWorkflowProcessModule where BusinessTypeGUID is NULL AND BusinessType<>'' and IsActive = 1";
             DataTable dt = CPQuery.From(sql).FillDataTable();
@@ -26,12 +26,13 @@ namespace WF.Upgrade.Business
                                                 {"TableName", "myWorkflowProcessModule"},
                                                 {"ProcessName", row["ProcessName"].ToString()}
                                             }).ToList();
-            return new CheckResult
-            {
-                ErrorList = errorList,
-                RepairParamList = repairParamList,
-                ErrorCode = "10102"
-            };
+            return null;
+            //return new CheckResult
+            //{
+            //    ErrorList = errorList,
+            //    RepairParamList = repairParamList,
+            //    ErrorCode = "10102"
+            //};
         }
 
         public object Repair(object input)
@@ -54,7 +55,7 @@ namespace WF.Upgrade.Business
     [CheckRuleName("已启用的流程模版中业务对象和业务类型不匹配")]
     public class BU_Module_BusinessObjWithBizType : ICheckRule
     {
-        public CheckResult Check(object input)
+        public CheckRule Check(object input)
         {
             StringBuilder strSql = new StringBuilder();
             //1、有业务对象 没有业务类型
@@ -82,12 +83,13 @@ namespace WF.Upgrade.Business
                                                 {"ProcessName", row["ProcessName"].ToString()},
                                                 {"ProcessGUID", row["ProcessGUID"].ToString()}
                                             }).ToList();
-            return new CheckResult
-            {
-                ErrorList = errorList,
-                RepairParamList = repairParamList,
-                ErrorCode = "10102"
-            };
+            return null;
+            //return new CheckResult
+            //{
+            //    ErrorList = errorList,
+            //    RepairParamList = repairParamList,
+            //    ErrorCode = "10102"
+            //};
         }
 
         public object Repair(object input)
@@ -101,10 +103,10 @@ namespace WF.Upgrade.Business
     [CheckRuleType("after-up")]
     [CheckRuleRemark("已启用的流程模版中:有业务对象,没有业务类型;，没有业务对象（包括业务对象被删除的情况）,有业务类型;导致模板无法发起、实例无法查看")]
     [CheckRuleKind("数据检测")]
-    [CheckRuleName("已启用的流程模版中业务对象和业务类型不匹配")]
+    [CheckRuleName("已启用的流程模版中业务对象和业务类型不匹配2")]
     public class AU_Module_BusinessObjWithBizType : ICheckRule
     {
-        public CheckResult Check(object input)
+        public CheckRule Check(object input)
         {
             StringBuilder strSql = new StringBuilder();
             //1、找不到匹配的业务对象
@@ -124,12 +126,13 @@ namespace WF.Upgrade.Business
                                                 {"TableName", "myWorkflowProcessModule"},
                                                 {"ProcessName", row["ProcessName"].ToString()}
                                             }).ToList();
-            return new CheckResult
-            {
-                ErrorList = errorList,
-                RepairParamList = repairParamList,
-                ErrorCode = "10102"
-            };
+            return null;
+            //return new CheckResult
+            //{
+            //    ErrorList = errorList,
+            //    RepairParamList = repairParamList,
+            //    ErrorCode = "10102"
+            //};
         }
 
         public object Repair(object input)

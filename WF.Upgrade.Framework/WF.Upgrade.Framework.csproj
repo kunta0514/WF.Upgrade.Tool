@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Utility.cs" />
     <Compile Include="CPQuery\ConnectionManager.cs" />
     <Compile Include="CPQuery\ConnectionScope.cs" />
     <Compile Include="CPQuery\CPQuery.cs" />
@@ -52,6 +52,7 @@
     <Compile Include="CPQuery\DbHelper.cs" />
     <Compile Include="CPQuery\IDbExecute.cs" />
     <Compile Include="CPQuery\IgnoreColumnAttribute.cs" />
+    <Compile Include="CPQuery\Initializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

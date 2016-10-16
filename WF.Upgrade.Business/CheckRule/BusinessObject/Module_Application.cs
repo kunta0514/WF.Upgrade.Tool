@@ -6,7 +6,7 @@ using System.Data;
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
-using WF.Upgrade.Framework;
+using WF.Upgrade.Framework.CPQuery;
 
 namespace WF.Upgrade.Business
 {
@@ -18,7 +18,7 @@ namespace WF.Upgrade.Business
     [CheckRuleName("已启用的流程模版中没有所属系统")]
     public class Module_Application : ICheckRule
     {
-        public CheckResult Check(object input)
+        public CheckRule Check(object input)
         {
             //TODO:自动生成修复语，合并到升级语句中，执行顺序为1（升级前处理）
             //TODO:模板3要素+被删除的模板，但是实例中存在的
@@ -33,12 +33,13 @@ namespace WF.Upgrade.Business
                                                 {"ProcessGUID",row["ProcessGUID"].ToString()}
                                             }).ToList();
             //Repair(null);
-            return new CheckResult
-            {
-                ErrorList = errorList,
-                RepairParamList = repairParamList,
-                ErrorCode = "10101"
-            };
+            return null;
+            //return new CheckResult
+            //{
+            //    ErrorList = errorList,
+            //    RepairParamList = repairParamList,
+            //    ErrorCode = "10101"
+            //};
         }
 
         public object Repair(object input)

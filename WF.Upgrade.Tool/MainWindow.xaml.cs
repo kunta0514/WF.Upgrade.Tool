@@ -34,6 +34,11 @@ namespace WF.Upgrade.Tool
         {
             //cef.RegisterJsObject("callbackObj", new CallbackObjectForJs());
             cef.MenuHandler = new MenuHandler();
+            var Address = Environment.CurrentDirectory + @"\resource\html\check\index.html?Rand=" + DateTime.Now;
+            //var Address = "http://10.5.106.25:1111/";
+            //var Address = Environment.CurrentDirectory + @"\resource\html\site\index.html?Rand=" + DateTime.Now;
+
+            cef.Address = Address;
             //TODO:前端注册的JS对象统一，然后再分发到其他的Service。也可以改为new不同的cef，然后注册对应的Service。 
             //           
             cef.RegisterJsObject("CheckRuleService", new CheckRuleService());
@@ -53,15 +58,15 @@ namespace WF.Upgrade.Tool
 
             //    // 不让cef自己处理
             //    e.Handled = true;
-            //};
-
+            //};    
 
         }
 
         private void local_init()
         {
             //本地库初始化            
-            LocalDBService.init();
+            Initializer.Init_SQLite();
+            Initializer.Init_CP_Coon();
             //数据初始化
             CheckRuleService crs = new CheckRuleService();
             crs.InitCheckRule();

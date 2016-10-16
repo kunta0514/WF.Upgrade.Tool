@@ -133,7 +133,7 @@
             })
         });    
 
-
+        //规则检测
         $(document).on('click', "#tb_check tbody td a[name='check']", function () {
             //var data = $(this);
             //console.log($(this));           
@@ -142,13 +142,16 @@
             var tr = $(this).parent().parent();
             //console.log($(this).attr("rel"));
             if (tr.attr("name") != "") {
-                var requestStr = CheckRuleService.checkRule(tr.attr("name"));
-                var requestData = JSON.parse(requestStr);
+                var check_rule = CheckRuleService.checkRule(tr.attr("name"));
+                var date = JSON.parse(check_rule);
+
+                console.log(date);
 
                 if (requestData.result == "0") {
-                    $("#myModal").find(".modal-body").html(requestData.message);
+                    $("#myModal").find(".modal-body").html(requestData.err_msg);
                     return;
                 }
+                //TODO::返回结果记录到本地数据库中
                 var result = requestData.data;
 
                 if (result.CheckResult.ErrorList.length > 0) {
@@ -157,6 +160,14 @@
                 }
             }
         });
+
+        //开打详情，只需主键，数据从本地库中读取
+        $(document).on('click', "#tb_check tbody td a[name='view_check']", function () {
+            //没有扫描过的直接读取
+            var ruleName = $(this).parent().parent().attr("guid");
+            location.href = "view.html?guid=" + escape(ruleName);
+        });
+
 
         $(document).on("keypress", '.search-form[type="search"]', function (e) {
             if (e.keyCode == "13") {

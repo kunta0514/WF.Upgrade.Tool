@@ -5,7 +5,7 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace WF.Upgrade.Framework
+namespace WF.Upgrade.Framework.CPQuery
 {
     /// <summary>
     /// IDB执行接口

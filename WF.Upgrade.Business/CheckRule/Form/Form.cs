@@ -4,7 +4,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
-using WF.Upgrade.Framework;
+using WF.Upgrade.Framework.CPQuery;
 
 namespace WF.Upgrade.Business
 {
@@ -16,7 +16,7 @@ namespace WF.Upgrade.Business
     [CheckRuleName("表单修改业务数据链接扫描")]
     public class 表单修改业务数据链接扫描 : ICheckRule 
     {
-        public CheckResult Check(object input)
+        public CheckRule Check(object input)
         {
 
             var sql = @"SELECT  DISTINCT
@@ -46,12 +46,13 @@ namespace WF.Upgrade.Business
                                                 {"BusinessTypeName", row["BusinessTypeName"].ToString()},
 
                                             }).ToList();
-            return new CheckResult
-                   {
-                       ErrorTitle = "表单业务数据链接为空",
-                       ErrorList = errorList,
-                       RepairParamList = repairParamList
-                   };
+            return null;
+            //return new CheckResult
+            //       {
+            //           ErrorTitle = "表单业务数据链接为空",
+            //           ErrorList = errorList,
+            //           RepairParamList = repairParamList
+            //       };
         }
 
         public object Repair(object input)
@@ -70,7 +71,7 @@ namespace WF.Upgrade.Business
     [CheckRuleName("HTML表单自定义JS扫描")]
     public class HTML表单自定义JS扫描:  ICheckRule
     {
-        public CheckResult Check(object input)
+        public CheckRule Check(object input)
         {
 
             var path = Site.GetSiteInfoEntity().UpFilesAddress +@"\WorkflowDoc\流程模板";
@@ -96,13 +97,14 @@ namespace WF.Upgrade.Business
                     }
                 }
             }
-          
-            return new CheckResult
-            {
-                ErrorTitle = "HTML表单中包含js脚本,共扫描： "+ filesInfos.LongCount<FileInfo>()+"条！",
-                ErrorList = errorList,
-                RepairParamList = repairParamList
-            };
+            return null;
+
+            //return new CheckResult
+            //{
+            //    ErrorTitle = "HTML表单中包含js脚本,共扫描： "+ filesInfos.LongCount<FileInfo>()+"条！",
+            //    ErrorList = errorList,
+            //    RepairParamList = repairParamList
+            //};
 
         }
 
@@ -123,7 +125,7 @@ namespace WF.Upgrade.Business
     public class 流程实例业务类型为空 :  ICheckRule
     {
 
-        public CheckResult Check(object input)
+        public CheckRule Check(object input)
         {
             try
             {
@@ -145,19 +147,21 @@ namespace WF.Upgrade.Business
                                                            {"ProcessGuid", row["ProcessName"].ToString()},
 
                                                        }).ToList();
-                return new CheckResult
-                {
-                    ErrorTitle = "流程实例中没有业务类型",
-                    ErrorList = errorList,
-                    RepairParamList = repairParamList
-                };
+                return null;
+                //return new CheckResult
+                //{
+                //    ErrorTitle = "流程实例中没有业务类型",
+                //    ErrorList = errorList,
+                //    RepairParamList = repairParamList
+                //};
             }
             catch (Exception ex)
             {
-                return new CheckResult
-                {
-                    ExceptionMessage = ex.Message
-                };
+                //return new CheckResult
+                //{
+                //    ExceptionMessage = ex.Message
+                //};
+                return null;
             }
         }
 

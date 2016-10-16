@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
-using WF.Upgrade.Framework;
+using WF.Upgrade.Framework.CPQuery;
 
 namespace WF.Upgrade.Business
 {
@@ -15,7 +15,7 @@ namespace WF.Upgrade.Business
     //[CheckRuleName("流程实例没有对应业务类型")]
     public class ProcessEntity : ICheckRule
     {
-        public CheckResult Check(object input)
+        public CheckRule Check(object input)
         {
             string sql = @"select ProcessGUID,a.ProcessName,a.BusinessTypeGUID , a.BusinessType,b.BusinessTypeGUID,b.BusinessTypeName 
                         FROM dbo.myWorkflowProcessEntity a LEFT JOIN dbo.myWorkflowBizType b ON b.BusinessTypeGUID = a.BusinessTypeGUID
@@ -30,13 +30,13 @@ namespace WF.Upgrade.Business
                                                 {"ProcessGUID", row["ProcessGUID"].ToString()},
                                                 {"ProcessName", row["ProcessName"].ToString()}
                                             }).ToList();
-
-            return new CheckResult
-            {
-                ErrorList = errorList,
-                RepairParamList = repairParamList,
-                ErrorCode = "10201"
-            };
+            return null;
+            //return new CheckResult
+            //{
+            //    ErrorList = errorList,
+            //    RepairParamList = repairParamList,
+            //    ErrorCode = "10201"
+            //};
         }
 
         public object Repair(object input)
@@ -55,7 +55,7 @@ WHERE a.BusinessType<>'' AND a.BusinessTypeGUID IS NULL";
     //[CheckRuleName("流程实例没有对应流程模板")]
     public class ProcessEntityNoModule : ICheckRule
     {
-        public CheckResult Check(object input)
+        public CheckRule Check(object input)
         {
             string sql = @"SELECT  a.ProcessName,a.ProcessModuleGUID
                         FROM    dbo.myWorkflowProcessEntity a
@@ -73,13 +73,13 @@ WHERE a.BusinessType<>'' AND a.BusinessTypeGUID IS NULL";
                                                 {"ProcessModuleGUID", row["ProcessModuleGUID"].ToString()},
                                                 {"ProcessName", row["ProcessName"].ToString()}
                                             }).ToList();
-
-            return new CheckResult
-            {
-                ErrorList = errorList,
-                RepairParamList = repairParamList,
-                ErrorCode = "10201"
-            };
+            return null;
+            //return new CheckResult
+            //{
+            //    ErrorList = errorList,
+            //    RepairParamList = repairParamList,
+            //    ErrorCode = "10201"
+            //};
         }
 
         public object Repair(object input)
@@ -96,7 +96,7 @@ WHERE a.BusinessType<>'' AND a.BusinessTypeGUID IS NULL";
     [CheckRuleName("流程实例没有对应SiteName")]
     public class ProcessEntityNoSiteName : ICheckRule
     {
-        public CheckResult Check(object input)
+        public CheckRule Check(object input)
         {
             string sql = @"SELECT ProcessGUID,ProcessName FROM dbo.myWorkflowProcessEntity WHERE ISNULL(SiteName,'')=''";
 
@@ -109,13 +109,13 @@ WHERE a.BusinessType<>'' AND a.BusinessTypeGUID IS NULL";
                                                 {"ProcessGUID", row["ProcessGUID"].ToString()},
                                                 {"ProcessName", row["ProcessName"].ToString()}
                                             }).ToList();
-
-            return new CheckResult
-            {
-                ErrorList = errorList,
-                RepairParamList = repairParamList,
-                ErrorCode = "10201"
-            };
+            return null;
+            //return new CheckResult
+            //{
+            //    ErrorList = errorList,
+            //    RepairParamList = repairParamList,
+            //    ErrorCode = "10201"
+            //};
         }
 
         public object Repair(object input)
@@ -132,7 +132,7 @@ WHERE a.BusinessType<>'' AND a.BusinessTypeGUID IS NULL";
     [CheckRuleName("流程代办等标签页的流程分类总数和列表数量不一致")]
     public class ProcessEntityTypeNotMatchTypeGUID : ICheckRule
     {
-        public CheckResult Check(object input)
+        public CheckRule Check(object input)
         {
             string sql = @"SELECT ProcessGUID,ProcessName FROM dbo.myWorkflowProcessEntity WHERE BusinessTypeGUID IS NOT NULL AND BusinessType=''";
 
@@ -145,13 +145,13 @@ WHERE a.BusinessType<>'' AND a.BusinessTypeGUID IS NULL";
                                                 {"ProcessGUID", row["ProcessGUID"].ToString()},
                                                 {"ProcessName", row["ProcessName"].ToString()}
                                             }).ToList();
-
-            return new CheckResult
-            {
-                ErrorList = errorList,
-                RepairParamList = repairParamList,
-                ErrorCode = "10201"
-            };
+            return null;
+            //return new CheckResult
+            //{
+            //    ErrorList = errorList,
+            //    RepairParamList = repairParamList,
+            //    ErrorCode = "10201"
+            //};
         }
 
         public object Repair(object input)

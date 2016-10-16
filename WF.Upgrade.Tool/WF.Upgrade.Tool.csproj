@@ -156,11 +156,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Backend\CheckRuleService.cs" />
+    <Compile Include="Backend\Initializer.cs" />
     <Compile Include="Backend\UIScriptService.cs" />
     <Compile Include="Backend\FormMainData.cs" />
     <Compile Include="Backend\helper\JsonHelp.cs" />
     <Compile Include="Backend\helper\SQLiteHelper.cs" />
-    <Compile Include="Backend\LocalDBService.cs" />
     <Compile Include="Backend\SiteService.cs" />
     <Compile Include="Backend\UpDbService.cs" />
     <Compile Include="Backend\UpgradeActionService.cs" />
@@ -172,6 +172,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\SiteInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -250,10 +251,14 @@
     <Content Include="database\db.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Config\HtmlContentConfig.config" />
-    <None Include="Config\HtmlRulesConfig.config" />
-    <None Include="Config\site.json" />
-    <None Include="Config\SiteInfo.config" />
+    <None Include="config\HtmlContentConfig.config" />
+    <None Include="config\HtmlRulesConfig.config" />
+    <Content Include="config\site.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\SiteInfo.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="README.md" />
     <None Include="resource\Scripts\jquery-3.1.0.slim.min.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -357,10 +362,6 @@
     </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WF.CheckRule.Business\WF.CheckRule.Business（迁移后作废）.csproj">
-      <Project>{6592e203-62b5-4edb-bcae-7d1de7e264d4}</Project>
-      <Name>WF.CheckRule.Business（迁移后作废）</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WF.DbProvider\WF.DbProvider（迁移后作废）.csproj">
       <Project>{17876af6-0d2c-44c7-82ee-2520c3cf4bf0}</Project>
       <Name>WF.DbProvider（迁移后作废）</Name>
@@ -368,6 +369,10 @@
     <ProjectReference Include="..\WF.Upgrade.Business\WF.Upgrade.Business.csproj">
       <Project>{32d68777-03ab-4d69-acd6-ba614f986679}</Project>
       <Name>WF.Upgrade.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WF.Upgrade.Framework\WF.Upgrade.Framework.csproj">
+      <Project>{2adcbf89-e96b-4fd3-82bc-643644b5462b}</Project>
+      <Name>WF.Upgrade.Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\WF.Upgrade.Model\WF.Upgrade.Model（迁移后作废）.csproj">
       <Project>{0f213748-b365-4293-8096-e0033b573392}</Project>

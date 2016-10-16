@@ -58,6 +58,8 @@
     <Compile Include="CheckRule\ProcessModule\ProcessModuleStep.cs" />
     <Compile Include="CheckRule\RuleAttribute.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="CheckRule\Model\CheckRule.cs" />
+    <Compile Include="Model\CheckRuleResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Public\InitDb.cs" />
     <Compile Include="Public\Model\SiteInfo.cs" />

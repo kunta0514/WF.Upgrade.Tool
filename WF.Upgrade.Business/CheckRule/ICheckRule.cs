@@ -12,7 +12,7 @@ namespace WF.Upgrade.Business
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        CheckResult Check(object input);
+        CheckRule Check(object input);
 
         /// <summary>
         /// 修复接口
