@@ -194,7 +194,7 @@ namespace WF.Upgrade.Tool.Backend
             }
         }
         
-        public string ViewRule(string ruleName)
+        public string viewRule(string ruleName)
         {
             var info = checkRuleList.Find(r => r.name == ruleName);
 

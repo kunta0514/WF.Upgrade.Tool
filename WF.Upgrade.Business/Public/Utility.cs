@@ -40,11 +40,12 @@ namespace WF.Upgrade.Business
 
         public static string GetBaseDirectory()
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory;
+            //string path = AppDomain.CurrentDomain.BaseDirectory;
 
-            path = path.Replace(@"\bin\", @"\").Replace(@"\bin", @"\");
+            //path = path.Replace(@"\bin\", @"\").Replace(@"\bin", @"\");
 
-            return path;
+            //return path;
+            return Environment.CurrentDirectory;
         }
     }
 }

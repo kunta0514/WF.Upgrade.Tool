@@ -186,6 +186,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="resource\html\check\view.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="高保真\index.html" />
     <Content Include="高保真\links\page-1-修复过程.html" />
     <Content Include="高保真\links\page-1-升级前.html" />

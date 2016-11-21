@@ -73,6 +73,7 @@
   <ItemGroup>
     <Folder Include="CodeUp\" />
     <Folder Include="DbUp\" />
+    <Folder Include="Site\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WF.Upgrade.Framework\WF.Upgrade.Framework.csproj">

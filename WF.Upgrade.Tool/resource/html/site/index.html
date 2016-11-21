@@ -12,9 +12,7 @@
 </head>
 <body>
     <form method="post">
-
         <div class="container-fluid">
-            <br />
             <div class="row">
                 <div class="col-sm-6">
                     <label class="col-sm-4" for="CustomCode">客户编码</label>
@@ -29,7 +27,6 @@
                     </div>
                 </div>
             </div>
-            <br />
             <div class="row">
                 <div class="col-sm-6">
                     <label class="col-sm-4" for="WFUrl">工作流地址</label>
@@ -44,7 +41,6 @@
                     </div>
                 </div>
             </div>
-            <br />
             <div class="row">
                 <div class="col-sm-6">
                     <label class="col-sm-4" for="ERPVersion">Erp版本</label>
@@ -59,7 +55,6 @@
                     </div>
                 </div>
             </div>
-            <br />
             <div class="row">
                 <div class="col-sm-6">
                     <label class="col-sm-4" for="DBName">数据库名称</label>
@@ -74,7 +69,6 @@
                     </div>
                 </div>
             </div>
-            <br />
             <div class="row">
                 <div class="col-sm-6">
                     <label class="col-sm-4" for="DBSaPassword">数据库密码</label>
@@ -86,7 +80,6 @@
                     <input type="button" name="test_dbconn" data-toggle="modal" data-target="#myModal" class="btn btn-info" value="测试连接" />
                 </div>
             </div>
-            <br />
             <div class="row">
                 <div class="col-sm-12">
                     <label class="col-sm-2" for="UpFilesAddress">UpFiles地址</label>
@@ -95,7 +88,6 @@
                     </div>
                 </div>
             </div>
-            <br />
             <div class="row">
                 <div class="col-sm-12">
                     <label class="col-sm-2" for="UpFilesAddress">工作流站点地址</label>
@@ -118,6 +110,14 @@
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div id="alert_content" class="alert alert-success" role="alert"></div>
     </div>
+    <script type="text/javascript">
 
+        $(function () {
+            var data = SiteInfoData.GetSiteInfo();
+
+            var item = JSON.parse(data);
+        });
+
+    </script>
 </body>
 </html>

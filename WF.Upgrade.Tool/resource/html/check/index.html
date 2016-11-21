@@ -164,8 +164,13 @@
         //开打详情，只需主键，数据从本地库中读取
         $(document).on('click', "#tb_check tbody td a[name='view_check']", function () {
             //没有扫描过的直接读取
-            var ruleName = $(this).parent().parent().attr("guid");
-            location.href = "view.html?guid=" + escape(ruleName);
+            var tr = $(this).parent().parent();
+            if (tr.attr("name") != "") {
+                location.href = "view.html?guid=" + escape(tr.attr("name"));
+            } else {
+                $.toast("规则读取失败", "info");
+            }
+            
         });
 
 

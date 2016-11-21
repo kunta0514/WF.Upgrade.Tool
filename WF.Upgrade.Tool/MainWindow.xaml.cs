@@ -28,6 +28,7 @@ namespace WF.Upgrade.Tool
             InitializeComponent();
             page_init();
             local_init();
+            string site = SiteService.GetSiteInfo();
         }
 
         private void page_init()

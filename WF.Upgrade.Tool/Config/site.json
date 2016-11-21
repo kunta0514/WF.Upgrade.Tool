@@ -1,5 +1,4 @@
 ﻿{
-  "SiteInfo": {
     "CustomCode": "localhost",
     "CustomName": "wh-zs",
     "ERPUrl": "http://localhost:10001",
@@ -11,5 +10,4 @@
     "DBSaPassword": "95938",
     "UpFilesAddress": "E:\\workflow\\07 项目ERP\\04 重庆融汇",
     "WFAddress": "E:\\workflow\\07 项目ERP\\04 重庆融汇"
-  }
 }
